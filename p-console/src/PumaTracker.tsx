@@ -1,3 +1,5 @@
+import { Activity, Wind, Gauge, Sparkles } from "lucide-react";
+
 export type PumaData = {
   inhaledO2: number;
   exhaledO2: number;
@@ -27,7 +29,7 @@ export const DEFAULT_PUMA: PumaData = {
 export default function PumaTracker({ data = DEFAULT_PUMA }: { data?: PumaData }) {
   return (
     <div className="puma-tracker-card p-5 bg-slate-900/80 rounded-xl border border-slate-800 text-white">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-3 mb-4 gap-2">
         <div>
           <span className="eyebrow text-cyan-400">NASA PUMA TECHNOLOGY SUITE</span>
           <h3 className="text-base font-bold text-white">Portable Unit for Metabolic Analysis</h3>
@@ -35,8 +37,9 @@ export default function PumaTracker({ data = DEFAULT_PUMA }: { data?: PumaData }
             Real-time breath-by-breath gas exchange and metabolic substrate utilization (PMC10973451).
           </p>
         </div>
-        <span className="text-xs font-mono px-2 py-1 bg-emerald-950/70 border border-emerald-500/40 text-emerald-400 rounded">
-          ● SENSOR NOMINAL
+        <span className="inline-flex items-center text-xs font-mono px-2.5 py-1 bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 rounded-full w-fit">
+          <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse mr-1.5" />
+          SENSOR NOMINAL
         </span>
       </div>
 
@@ -62,11 +65,11 @@ export default function PumaTracker({ data = DEFAULT_PUMA }: { data?: PumaData }
         </div>
 
         <div className="puma-stat-box p-3 bg-slate-950/60 rounded border border-slate-800/80">
-          <span className="text-[10px] text-slate-400 font-mono block">METABOLIC GAS RATES</span>
+          <span className="text-[10px] text-slate-400 font-mono block">OXYGEN CONSUMPTION (VO₂)</span>
           <div className="mt-1 flex items-baseline justify-between">
-            <span className="text-xs text-slate-400">VO₂ / VCO₂:</span>
+            <span className="text-xs text-slate-400">Rate:</span>
             <strong className="text-sm font-mono text-emerald-300">
-              {data.vo2MlMin} / {data.vco2MlMin} <small className="text-[10px]">mL/min</small>
+              {data.vo2MlMin} <small className="text-[10px]">mL/min</small>
             </strong>
           </div>
         </div>
@@ -74,24 +77,23 @@ export default function PumaTracker({ data = DEFAULT_PUMA }: { data?: PumaData }
         <div className="puma-stat-box p-3 bg-slate-950/60 rounded border border-slate-800/80">
           <span className="text-[10px] text-slate-400 font-mono block">RESPIRATORY EXCHANGE (RER)</span>
           <div className="mt-1 flex items-baseline justify-between">
-            <span className="text-xs text-slate-400">VCO₂ / VO₂:</span>
-            <strong className="text-sm font-mono text-white">{data.rer}</strong>
+            <span className="text-xs text-slate-400">Ratio:</span>
+            <strong className="text-sm font-mono text-purple-300">
+              {data.rer} <small className="text-[10px] text-slate-400">(Carb/Fat 0.83)</small>
+            </strong>
           </div>
         </div>
       </div>
 
-      <div className="mt-3 grid grid-cols-3 gap-3 text-xs bg-slate-950/40 p-2.5 rounded border border-slate-800/50">
+      <div className="mt-4 pt-3 border-t border-slate-800/60 grid grid-cols-2 md:grid-cols-3 gap-2 text-xs font-mono text-slate-400">
         <div>
-          <span className="text-slate-400 block text-[10px]">Minute Ventilation (VE):</span>
-          <strong className="font-mono text-slate-200">{data.minuteVentilationLMin} L/min</strong>
+          Flow Rate: <span className="text-slate-200">{data.flowRateLs} L/s</span>
         </div>
         <div>
-          <span className="text-slate-400 block text-[10px]">Exhaled Gas Temp:</span>
-          <strong className="font-mono text-slate-200">{data.breathTempC} °C</strong>
+          Minute Ventilation: <span className="text-slate-200">{data.minuteVentilationLMin} L/min</span>
         </div>
         <div>
-          <span className="text-slate-400 block text-[10px]">Substrate Utilization:</span>
-          <strong className="font-mono text-cyan-400">44% Carb / 56% Lipid</strong>
+          Breath Core Temp: <span className="text-slate-200">{data.breathTempC} °C</span>
         </div>
       </div>
     </div>

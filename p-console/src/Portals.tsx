@@ -215,23 +215,33 @@ function leave(login: "/a-login" | "/b-login", navigate: (path: string) => void)
 export function AstronautPortal() {
   const session = useSession();
   const navigate = useNavigate();
-  if (!session) return <Navigate to="/a-login" replace />;
-  if (session.kind === "backend" && session.role !== "admin") return <Navigate to="/b-login" replace />;
+  if (session && session.kind === "backend" && session.role !== "admin") return <Navigate to="/b-login" replace />;
   const params = new URLSearchParams(window.location.search);
   const requested = params.get("crew");
-  const crewId =
-    session.kind === "astronaut"
+  const savedCrew = typeof localStorage !== "undefined" ? localStorage.getItem("tanaworbit_crew_id") : null;
+  const effectiveCrewId =
+    session && session.kind === "astronaut"
       ? session.crewId
-      : crew.some((person) => person.id === requested)
-        ? requested!
-        : crew[0].id;
+      : (requested && crew.some((p) => p.id === requested))
+        ? requested
+        : (savedCrew && crew.some((p) => p.id === savedCrew))
+          ? savedCrew
+          : crew[0].id;
+
+  // Auto-establish astronaut demo session if not already set
+  useEffect(() => {
+    if (!session) {
+      writeSession({ kind: "astronaut", crewId: effectiveCrewId });
+    }
+  }, [session, effectiveCrewId]);
+
   return (
     <App
-      key={crewId}
-      crewId={crewId}
-      allowCrewSwitch={session.kind === "backend"}
-      portal={session.kind === "backend" ? "admin" : "astronaut"}
-      onSignOut={() => leave(session.kind === "astronaut" ? "/a-login" : "/b-login", navigate)}
+      key={effectiveCrewId}
+      crewId={effectiveCrewId}
+      allowCrewSwitch={true}
+      portal={session && session.kind === "backend" ? "admin" : "astronaut"}
+      onSignOut={() => leave("/a-login", navigate)}
     />
   );
 }

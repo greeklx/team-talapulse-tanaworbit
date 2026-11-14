@@ -12,9 +12,17 @@
     "format": "oxfmt"
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cn": "^0.5.2",
+    "lucide-react": "^0.577.0",
+    "radix-ui": "^1.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.18.5"
+    "react-router-dom": "^7.18.5",
+    "recharts": "3.8.0",
+    "tailwind-merge": "^3.7.0",
+    "vaul": "^1.1.2"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",

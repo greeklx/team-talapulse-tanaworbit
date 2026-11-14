@@ -1,15 +1,19 @@
 import { useState } from "react";
+import { Orbit, LineChart, Activity, Gauge, ArrowRight, ArrowLeft, Check, X } from "lucide-react";
 
-export default function OnboardingModal({ onClose }: { onClose: () => void }) {
+export default function OnboardingModal({
+  isOpen = true,
+  onClose,
+}: {
+  isOpen?: boolean;
+  onClose: () => void;
+}) {
   const [step, setStep] = useState(1);
-  const totalSteps = 4;
+  if (!isOpen) return null;
 
   function next() {
-    if (step < totalSteps) setStep(step + 1);
-    else {
-      localStorage.setItem("tanaworbit_onboarded", "true");
-      onClose();
-    }
+    if (step < 4) setStep(step + 1);
+    else onClose();
   }
 
   function prev() {
@@ -17,70 +21,67 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-xl w-full p-6 text-white shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+      <div className="relative w-full max-w-xl p-6 md:p-8 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl text-slate-100">
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition cursor-pointer"
+          aria-label="Close tour"
+        >
+          <X size={18} />
+        </button>
+
         {/* Step Indicator */}
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-5">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
-            <span className="font-mono text-xs tracking-wider text-cyan-400 font-bold">
-              FLIGHT DECK ORIENTATION · STEP {step} OF {totalSteps}
-            </span>
-          </div>
-          <button
-            type="button"
-            onClick={onClose}
-            className="text-xs text-slate-400 hover:text-white"
-          >
-            Skip Orientation ✕
-          </button>
+        <div className="flex items-center gap-2 mb-6">
+          <span className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">
+            ORIENTATION TOUR · STEP {step} OF 4
+          </span>
         </div>
 
-        {/* Step Content */}
+        {/* Step 1: Real Crew Profiles */}
         {step === 1 && (
           <div className="space-y-4">
-            <div className="w-12 h-12 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 text-xl font-bold">
-              🚀
+            <div className="w-12 h-12 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
+              <Orbit size={24} />
             </div>
-            <h2 className="text-xl font-bold text-white">Welcome to TanawOrbit</h2>
+            <h2 className="text-xl font-bold text-white tracking-tight">Meet the Crew & Mission Profiles</h2>
             <p className="text-sm text-slate-300 leading-relaxed">
-              Designed by team <strong>Tala Pulse</strong> for the NASA Space Apps Challenge 2026.
-              TanawOrbit provides an integrated, connected perspective of health, physical performance,
-              and daily life beyond Earth for long-duration deep-space missions.
+              TanawOrbit monitors <strong>5 real Tala Pulse astronauts</strong> (Ella, Abrey, Hannah, Gary, Greek)
+              on Aster Expedition VII. Each crew member has calibrated preflight and in-flight anthropometrics
+              derived from NIH aerospace studies (PMC10973451).
             </p>
-            <div className="p-3 bg-slate-950/60 rounded-lg border border-slate-800 text-xs text-slate-400 space-y-1">
-              <div>• <strong>5 Active Crew Members:</strong> Real team biodata & spaceflight baselines.</div>
-              <div>• <strong>Mission:</strong> Aster Expedition VII · Day 142 of 270 (LEO 408 km).</div>
-              <div>• <strong>Core Paradigm:</strong> Proactive trend comparison, not just static alarms.</div>
+            <div className="p-3 bg-slate-950/60 rounded-lg border border-slate-800 text-xs text-slate-400">
+              Switch crew anytime from the top bar or sidebar to inspect individualized baseline shifts.
             </div>
           </div>
         )}
 
+        {/* Step 2: Longitudinal Telemetry */}
         {step === 2 && (
           <div className="space-y-4">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xl font-bold">
-              📊
+            <div className="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400">
+              <LineChart size={24} />
             </div>
-            <h2 className="text-xl font-bold text-white">Personal Baselines vs. Static Bounds</h2>
+            <h2 className="text-xl font-bold text-white tracking-tight">30-Day Physiological Baselines</h2>
             <p className="text-sm text-slate-300 leading-relaxed">
-              In microgravity, "normal" is deeply individual. TanawOrbit computes a rolling
-              <strong> 14-day personal arithmetic mean</strong> for resting heart rate, blood pressure,
-              sleep duration, and fatigue.
+              Instead of static snapshots, TanawOrbit benchmarks telemetry against a <strong>14-day rolling mean</strong>.
+              Clinical alerts trigger only when measurements diverge significantly from a crew member's personal norm.
             </p>
             <div className="p-3 bg-slate-950/60 rounded-lg border border-slate-800 text-xs text-slate-400 space-y-1">
-              <div>• <strong>Heart Rate Alert:</strong> ±15 bpm absolute shift from personal 14-day baseline.</div>
-              <div>• <strong>Blood Pressure Alert:</strong> ±15 mmHg systolic or diastolic shift.</div>
-              <div>• <strong>Circadian Fatigue:</strong> Sleep decreases &gt;1.5 hrs or fatigue score jumps &gt;1.5 pts.</div>
+              <div>• <strong>Heart Rate:</strong> ±15 bpm shift from personal 14-day baseline.</div>
+              <div>• <strong>Blood Pressure:</strong> ±15 mmHg systolic or diastolic shift.</div>
+              <div>• <strong>Circadian Fatigue:</strong> Sleep &lt;1.5 hrs or fatigue score jumps &gt;1.5 pts.</div>
             </div>
           </div>
         )}
 
         {step === 3 && (
           <div className="space-y-4">
-            <div className="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 text-xl font-bold">
-              👤
+            <div className="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400">
+              <Activity size={24} />
             </div>
-            <h2 className="text-xl font-bold text-white">Interactive Symptom & Fine Motor Testing</h2>
+            <h2 className="text-xl font-bold text-white tracking-tight">Interactive Symptom & Fine Motor Testing</h2>
             <p className="text-sm text-slate-300 leading-relaxed">
               Use the <strong>Anatomical Visualizer</strong> to click localized body regions (Cranial fluid shift,
               SANS ocular blur, vestibular nausea, spinal elongation backache) and immediately receive
@@ -95,10 +96,10 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
 
         {step === 4 && (
           <div className="space-y-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xl font-bold">
-              🛰️
+            <div className="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
+              <Gauge size={24} />
             </div>
-            <h2 className="text-xl font-bold text-white">ECLSS & PUMA Metabolic Integration</h2>
+            <h2 className="text-xl font-bold text-white tracking-tight">ECLSS & PUMA Metabolic Integration</h2>
             <p className="text-sm text-slate-300 leading-relaxed">
               Health does not happen in a vacuum. TanawOrbit cross-correlates crew symptoms with
               <strong> Cabin Life Support</strong> (14.7 psi, 3.1 psi O₂, 5.3 mmHg CO₂) and NASA's
@@ -117,9 +118,10 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
             type="button"
             onClick={prev}
             disabled={step === 1}
-            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-xs font-semibold rounded text-slate-300 transition"
+            className="flex items-center gap-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-xs font-semibold rounded text-slate-300 transition cursor-pointer"
           >
-            ← Previous
+            <ArrowLeft size={14} />
+            Previous
           </button>
           <div className="flex gap-1.5">
             {[1, 2, 3, 4].map((i) => (
@@ -134,9 +136,10 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
           <button
             type="button"
             onClick={next}
-            className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-xs font-semibold rounded text-white transition font-mono"
+            className="flex items-center gap-1.5 px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-xs font-semibold rounded text-white shadow-md transition cursor-pointer"
           >
-            {step === totalSteps ? "Commence Mission Console 🚀" : "Next Step →"}
+            <span>{step === 4 ? "Enter Console" : "Next"}</span>
+            {step === 4 ? <Check size={14} /> : <ArrowRight size={14} />}
           </button>
         </div>
       </div>

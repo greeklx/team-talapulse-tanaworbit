@@ -1,4 +1,39 @@
 import { lazy, Suspense, useEffect, useState, type FormEvent, type ReactNode } from "react";
+import {
+  Sun,
+  Moon,
+  Radio,
+  Compass,
+  Monitor,
+  Tablet,
+  Maximize2,
+  Minimize2,
+  LogOut,
+  AlertTriangle,
+  FileText,
+  Activity,
+  HeartPulse,
+  Heart,
+  Wind,
+  Thermometer,
+  Orbit,
+  Users,
+  TrendingUp,
+  LineChart,
+  Target,
+  Utensils,
+  Dumbbell,
+  UserCheck,
+  Sliders,
+  ClipboardCheck,
+  Stethoscope,
+  BookOpen,
+  Bell,
+  Download,
+  Plus,
+  ChevronRight,
+  ShieldAlert,
+} from "lucide-react";
 import { useConsoleDisplay, type DisplayMode } from "./useConsoleDisplay";
 import {
   BiodataPanel,
@@ -257,90 +292,162 @@ type Page =
   | "Health Guidance";
 type Status = "Stable" | "Observe" | "Attention";
 
+export const PAGE_HASH_MAP: Record<string, Page> = {
+  overview: "Astronaut Dashboard",
+  dashboard: "Astronaut Dashboard",
+  asutrnout: "Astronaut Dashboard",
+  astronaut: "Astronaut Dashboard",
+  vitals: "Physiological Monitoring",
+  physiological: "Physiological Monitoring",
+  puma: "Physiological Monitoring",
+  cabin: "Cabin Conditions",
+  eclss: "Cabin Conditions",
+  orbit: "Orbital Conditions",
+  hazards: "Orbital Conditions",
+  crew: "Mission Overview",
+  readiness: "Mission Overview",
+  trends: "Health Trends",
+  history: "Health Trends",
+  forecast: "Calculation Trend",
+  calculation: "Calculation Trend",
+  "motor-skills": "Sensorimotor & Reflex",
+  sensorimotor: "Sensorimotor & Reflex",
+  reflex: "Sensorimotor & Reflex",
+  nutrition: "Space Nutrition",
+  food: "Space Nutrition",
+  exercise: "Exercise & Recovery",
+  fitness: "Exercise & Recovery",
+  workout: "Exercise & Recovery",
+  baseline: "Biodata",
+  biodata: "Biodata",
+  standards: "Monitor Parameters",
+  parameters: "Monitor Parameters",
+  "check-in": "Health Check-In",
+  checkin: "Health Check-In",
+  countermeasures: "Health Toolkit",
+  toolkit: "Health Toolkit",
+  "living-guide": "Health Guidance",
+  guidance: "Health Guidance",
+  alerts: "Alerts & Attention",
+};
+
+export const PAGE_TO_HASH: Record<Page, string> = {
+  "Astronaut Dashboard": "overview",
+  "Physiological Monitoring": "vitals",
+  "Cabin Conditions": "cabin",
+  "Orbital Conditions": "orbit",
+  "Mission Overview": "crew",
+  "Health Trends": "trends",
+  "Calculation Trend": "forecast",
+  "Sensorimotor & Reflex": "motor-skills",
+  "Space Nutrition": "nutrition",
+  "Exercise & Recovery": "exercise",
+  "Biodata": "baseline",
+  "Monitor Parameters": "standards",
+  "Health Check-In": "check-in",
+  "Health Toolkit": "countermeasures",
+  "Health Guidance": "living-guide",
+  "Alerts & Attention": "alerts",
+};
+
+export const PAGE_DISPLAY_LABELS: Record<Page, string> = {
+  "Astronaut Dashboard": "Overview & Vitals Deck",
+  "Physiological Monitoring": "Live Body Vitals (PUMA)",
+  "Cabin Conditions": "Cabin Life Support",
+  "Orbital Conditions": "Space Hazards & Orbit",
+  "Mission Overview": "Whole Crew Readiness",
+  "Health Trends": "Personal Vitals History",
+  "Calculation Trend": "Predictive Trends & Forecast",
+  "Sensorimotor & Reflex": "Motor Skills & Reaction Test",
+  "Space Nutrition": "Space Food & Calorie Intake",
+  "Exercise & Recovery": "Daily Workout & Fitness",
+  "Biodata": "Crew Baseline & Body Composition",
+  "Monitor Parameters": "Safe Range Reference Standards",
+  "Health Check-In": "Daily Health Check-In",
+  "Health Toolkit": "Space Medicine & Countermeasures",
+  "Health Guidance": "Microgravity Living Guides",
+  "Alerts & Attention": "Health Alerts & Actions",
+};
+
 export type NavGroup = {
   pillar: string;
-  items: { page: Page; icon: IconName }[];
+  items: { page: Page; label: string; icon: IconName }[];
 };
 
 const navGroups: NavGroup[] = [
   {
-    pillar: "1. CREW MONITORING",
+    pillar: "1. LIVE CREW VITALS",
     items: [
-      { page: "Astronaut Dashboard", icon: "activity" },
-      { page: "Physiological Monitoring", icon: "pulse" },
-      { page: "Cabin Conditions", icon: "thermometer" },
-      { page: "Orbital Conditions", icon: "globe" },
-      { page: "Mission Overview", icon: "grid" },
+      { page: "Astronaut Dashboard", label: "Overview & Vitals Deck", icon: "activity" },
+      { page: "Physiological Monitoring", label: "Live Body Vitals (PUMA)", icon: "pulse" },
+      { page: "Cabin Conditions", label: "Cabin Life Support", icon: "thermometer" },
+      { page: "Orbital Conditions", label: "Space Hazards & Orbit", icon: "globe" },
+      { page: "Mission Overview", label: "Whole Crew Readiness", icon: "grid" },
     ],
   },
   {
-    pillar: "2. TRENDS & TELEMETRY",
+    pillar: "2. HEALTH TRENDS & FORECASTS",
     items: [
-      { page: "Health Trends", icon: "chart" },
-      { page: "Calculation Trend", icon: "chart" },
-      { page: "Sensorimotor & Reflex", icon: "check" },
-      { page: "Space Nutrition", icon: "battery" },
-      { page: "Exercise & Recovery", icon: "activity" },
-      { page: "Biodata", icon: "activity" },
-      { page: "Monitor Parameters", icon: "pulse" },
+      { page: "Health Trends", label: "Personal Vitals History", icon: "chart" },
+      { page: "Calculation Trend", label: "Predictive Trends & Forecast", icon: "chart" },
+      { page: "Sensorimotor & Reflex", label: "Motor Skills & Reaction Test", icon: "check" },
+      { page: "Space Nutrition", label: "Space Food & Calories", icon: "battery" },
+      { page: "Exercise & Recovery", label: "Daily Workout & Fitness", icon: "activity" },
+      { page: "Biodata", label: "Crew Baseline & Body Comp", icon: "activity" },
+      { page: "Monitor Parameters", label: "Safe Range Standards", icon: "pulse" },
     ],
   },
   {
-    pillar: "3. CREW CARE & GUIDANCE",
+    pillar: "3. MEDICAL CARE & PROTOCOLS",
     items: [
-      { page: "Health Check-In", icon: "check" },
-      { page: "Health Toolkit", icon: "help" },
-      { page: "Health Guidance", icon: "book" },
-      { page: "Alerts & Attention", icon: "bell" },
+      { page: "Health Check-In", label: "Daily Health Check-In", icon: "check" },
+      { page: "Health Toolkit", label: "Space Medicine & Actions", icon: "help" },
+      { page: "Health Guidance", label: "Zero-G Living Guides", icon: "book" },
+      { page: "Alerts & Attention", label: "Health Alerts & Actions", icon: "bell" },
     ],
   },
 ];
 
-const nav: { page: Page; icon: IconName }[] = navGroups.flatMap((group) => group.items);
+const nav: { page: Page; label: string; icon: IconName }[] = navGroups.flatMap((group) => group.items);
 
 function pageTitle(page: Page): string {
-  if (page === "Alerts & Attention") return "Health Monitoring Alerts";
-  if (page === "Health Guidance") return "Astronaut Health Guidance";
-  if (page === "Exercise & Recovery") return "Exercise & Recovery";
-  if (page === "Health Trends") return "Personal Health Trends";
-  if (page === "Health Check-In") return "Daily Health Check-In";
-  if (page === "Calculation Trend") return "Calculation Trend";
-  if (page === "Sensorimotor & Reflex") return "Sensorimotor & Fine Motor Assessment";
-  return page;
+  return PAGE_DISPLAY_LABELS[page] || page;
 }
 
 function pageLede(page: Page): string {
   switch (page) {
     case "Astronaut Dashboard":
-      return "A connected picture of your health. One mission day at a time.";
-    case "Sensorimotor & Reflex":
-      return "NASA Fine Motor Skills Test Battery (TM-2020-5008023) tracking coordination and reaction times.";
-    case "Mission Overview":
-      return "One mission. One crew. A connected view of health and readiness.";
-    case "Health Check-In":
-      return "Take a moment to record your measurements and how you’re feeling.";
-    case "Exercise & Recovery":
-      return "Record movement. Review effort. Understand recovery in context.";
-    case "Health Toolkit":
-      return "Measure with context. Follow a routine. Understand what the data can—and cannot—say.";
-    case "Health Trends":
-      return "Understand what’s changing by comparing measurements with your personal baseline.";
-    case "Calculation Trend":
-      return "See the 14-day mean, the current reading, and the demonstration rule side by side.";
+      return "Continuous health telemetry summary, interactive body map, and today's vital indicators.";
     case "Physiological Monitoring":
-      return "A multi-signal view of simulated physiological measurements.";
-    case "Monitor Parameters":
-      return "The fields and demonstration bounds this prototype checks. Not clinical limits.";
-    case "Biodata":
-      return "A fictional body description for the selected profile.";
+      return "Continuous heart rhythm (ECG), blood oxygen (SpO₂), respiration, and NASA PUMA lung gas exchange.";
     case "Cabin Conditions":
-      return "Scripted cabin samples for the shared fictional vehicle.";
+      return "Spacecraft atmospheric pressure (14.7 psi), oxygen levels (3.1 psi), temperature, and ventilation velocity.";
     case "Orbital Conditions":
-      return "A short scripted series of altitude, lighting, and velocity.";
+      return "Real-time space radiation dosimeter, microgravity acceleration levels, and orbital trajectory.";
+    case "Mission Overview":
+      return "Simultaneous health, workload, and flight readiness status across all 5 flight crew members.";
+    case "Health Trends":
+      return "Day-by-day personal history of blood pressure, resting pulse, sleep duration, and fatigue trends.";
+    case "Calculation Trend":
+      return "14-day rolling averages, personal baseline variance, and long-term adaptation projections.";
+    case "Sensorimotor & Reflex":
+      return "NASA Fine Motor Skills Test Battery (TM-2020-5008023) tracking coordination and visual reaction times.";
     case "Space Nutrition":
-      return "Example intake for the selected profile. Not a diet order.";
+      return "Daily meals logged against 2,400 kcal target, with protein, carb, fat, and hydration tracking.";
+    case "Exercise & Recovery":
+      return "Mandatory 2-hour workout log: ARED heavy resistance training and T2 cycle ergometer sessions.";
+    case "Biodata":
+      return "Preflight vs. in-flight weight, body composition, lean muscle mass, and stature elongation.";
+    case "Monitor Parameters":
+      return "Clinically acceptable normal, warning, and emergency thresholds for human spaceflight.";
+    case "Health Check-In":
+      return "Record your daily measurements, physical symptoms, fatigue level, and self-reported mood.";
+    case "Health Toolkit":
+      return "In-flight medical kits and countermeasures for space sickness, eye changes (SANS), and spinal ache.";
+    case "Health Guidance":
+      return "Practical protocols for eating, drinking, personal hygiene, and sleeping in zero gravity.";
     case "Alerts & Attention":
-      return "Observe changes. Review context. Stay informed.";
+      return "Active sensor notifications, physiological alerts, and flight surgeon recommendations.";
     default:
       return "Research-informed context for life and health beyond Earth.";
   }
@@ -882,8 +989,17 @@ export type ConsoleProps = {
   onSignOut: () => void;
 };
 
+function getInitialPage(): Page {
+  if (typeof window === "undefined") return "Astronaut Dashboard";
+  const hash = window.location.hash.replace(/^#\/?/, "").toLowerCase();
+  if (hash && PAGE_HASH_MAP[hash]) {
+    return PAGE_HASH_MAP[hash];
+  }
+  return "Astronaut Dashboard";
+}
+
 function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
-  const [page, setPage] = useState<Page>("Astronaut Dashboard");
+  const [page, setPage] = useState<Page>(getInitialPage);
   const [selectedCrew, setSelectedCrew] = useState(() => {
     const index = crew.findIndex((person) => person.id === crewId);
     return index >= 0 ? index : 0;
@@ -1055,9 +1171,33 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
   }
   function navigate(next: Page) {
     setPage(next);
+    if (typeof window !== "undefined") {
+      const slug = PAGE_TO_HASH[next] || "overview";
+      window.location.hash = slug;
+    }
     setSidebarOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash.replace(/^#\/?/, "").toLowerCase();
+      if (hash && PAGE_HASH_MAP[hash]) {
+        setPage(PAGE_HASH_MAP[hash]);
+      }
+    };
+    window.addEventListener("hashchange", onHashChange);
+    if (!window.location.hash) {
+      window.location.hash = PAGE_TO_HASH[page] || "overview";
+    }
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, [page]);
+
+  useEffect(() => {
+    if (typeof localStorage !== "undefined" && crew[selectedCrew]) {
+      localStorage.setItem("tanaworbit_crew_id", crew[selectedCrew].id);
+    }
+  }, [selectedCrew]);
   function openToolkit(tab: ToolkitTab = "measure", metric?: MetricId) {
     setGuideOpen(false);
     setModal(null);
@@ -1936,7 +2076,7 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                   {group.pillar}
                 </div>
                 <div className="space-y-0.5">
-                  {group.items.map(({ page: target, icon }) => (
+                  {group.items.map(({ page: target, label, icon }) => (
                     <button
                       key={target}
                       className={page === target ? "nav-item active" : "nav-item"}
@@ -1944,7 +2084,7 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                       onClick={() => navigate(target)}
                     >
                       <Icon name={icon} size={17} />
-                      <span>{target}</span>
+                      <span>{label || target}</span>
                       {target === "Alerts & Attention" && (
                         <b className="nav-count">
                           {
@@ -2042,34 +2182,30 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                   title="Switch between Workstation and Tactical Tablet mode"
                   onClick={() => display.setMode(display.touch ? "desktop" : "touch")}
                 >
-                  <Icon name={display.touch ? "tablet" : "monitor"} size={16} />
+                  {display.touch ? <Tablet size={15} /> : <Monitor size={15} />}
                   <span>{display.touch ? "Tactical Tablet" : "Workstation"}</span>
                 </button>
                 <button
                   className="display-control"
                   aria-label="Toggle visual theme"
-                  title="Switch between Dark Ops and Clean Daylight Mode"
+                  title={theme === "dark" ? "Switch to Clean Daylight Mode" : "Switch to Dark Ops Mode"}
                   onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
                 >
-                  <span>{theme === "dark" ? "☀️ Daylight" : "🌙 Dark Ops"}</span>
+                  {theme === "dark" ? (
+                    <Sun size={15} className="text-amber-400" />
+                  ) : (
+                    <Moon size={15} className="text-cyan-300" />
+                  )}
+                  <span>{theme === "dark" ? "Daylight" : "Dark Ops"}</span>
                 </button>
                 <button
                   className={`display-control ${liveStream ? "is-on" : ""}`}
                   aria-label="Toggle live simulation telemetry stream"
-                  title="Simulate continuous live physiological sensor stream"
+                  title="Simulate continuous live physiological sensor stream (4 Hz)"
                   onClick={() => setLiveStream((v) => !v)}
                 >
-                  <span
-                    style={{
-                      display: "inline-block",
-                      width: "8px",
-                      height: "8px",
-                      borderRadius: "50%",
-                      backgroundColor: liveStream ? "#5cc9e6" : "#64748b",
-                      marginRight: "4px",
-                    }}
-                  />
-                  <span>{liveStream ? "Live Stream" : "Stream Paused"}</span>
+                  <Radio size={14} className={liveStream ? "text-cyan-400 animate-pulse" : "text-slate-400"} />
+                  <span>{liveStream ? "Live 4Hz" : "Paused"}</span>
                 </button>
                 <button
                   className="display-control"
@@ -2077,7 +2213,8 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                   title="Explore guided mission walkthrough"
                   onClick={() => setModal("onboarding")}
                 >
-                  <span>🧭 Tour</span>
+                  <Compass size={15} className="text-cyan-400" />
+                  <span>Tour</span>
                 </button>
                 <button
                   className="display-control icon-only"
@@ -2094,10 +2231,10 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                       );
                   }}
                 >
-                  <Icon name="expand" size={18} />
+                  {display.fullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
                 </button>
                 <button className="display-control" aria-label="Sign out of console" onClick={signOut}>
-                  <Icon name="logout" size={17} />
+                  <LogOut size={15} />
                   <span>Sign out</span>
                 </button>
               </div>
@@ -2118,7 +2255,7 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
               </button>
             </div>
           </header>
-          <main>
+          <main className={display.touch ? "!pb-36" : ""}>
             <div className="page-heading">
               <div>
                 <div className="eyebrow">
