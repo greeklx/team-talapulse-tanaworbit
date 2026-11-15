@@ -771,12 +771,16 @@ main {
 
 .account-modal {
   max-width: 560px;
-  max-height: min(720px, calc(100vh - 120px));
-  margin-bottom: 64px;
-  overflow: auto;
+  width: 100%;
+  max-height: calc(100dvh - 48px) !important;
+  margin: auto !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   background: var(--panel);
   color: var(--text);
   border-color: var(--border);
+  padding: 30px 24px 28px !important;
 }
 
 .account-modal .primary-button,

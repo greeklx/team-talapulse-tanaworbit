@@ -2668,13 +2668,16 @@ textarea::placeholder {
   inset: 0;
   z-index: 90;
   background: rgba(5, 11, 22, 0.75);
-  backdrop-filter: none;
+  backdrop-filter: blur(4px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 25px;
+  padding: 24px 16px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .modal {
+  margin: auto;
   max-width: 500px;
   width: 100%;
   padding: 32px;
@@ -2684,6 +2687,9 @@ textarea::placeholder {
   border: 1px solid var(--border);
   color: var(--text);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .modal-close {
   position: absolute;

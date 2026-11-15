@@ -1096,11 +1096,10 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
     const line = `${bio.ageYears} years · ${bio.statureCm} cm · ${bio.massKg} kg · blood type ${bio.bloodTypeLabel}`;
     const fromNotice = source === "notice";
     setAccountNote(`${person.name}. ${line}`);
-    setAccountNoteSeen(fromNotice);
+    setAccountNoteSeen(true);
     setNoticesOpen(false);
     setSidebarOpen(false);
     setModal("account");
-    if (!fromNotice) notify(`Account opened. ${line}`, "info");
   }
   function exportData() {
     const cell = (value: string) => `"${value.replace(/"/g, '""')}"`;

@@ -172,39 +172,12 @@ export default function AnatomicalAvatar({
   const [selectedSymptom, setSelectedSymptom] = useState<string>("");
   const [severity, setSeverity] = useState<"Mild" | "Moderate" | "Severe">("Mild");
   const [loggedNotice, setLoggedNotice] = useState<string | null>(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const zoneInfo = ZONE_DATA[activeZone];
 
-  // Close dropdown on outside click
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setDropdownOpen(false);
-      }
-    }
-    if (dropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
-    }
-  }, [dropdownOpen]);
-
-  // Close dropdown on Escape key
-  useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setDropdownOpen(false);
-    }
-    if (dropdownOpen) {
-      document.addEventListener("keydown", handleKeyDown);
-      return () => document.removeEventListener("keydown", handleKeyDown);
-    }
-  }, [dropdownOpen]);
-
-  // Reset selected symptom & close dropdown when user clicks a different body zone
+  // Reset selected symptom when user clicks a different body zone
   useEffect(() => {
     setSelectedSymptom("");
-    setDropdownOpen(false);
   }, [activeZone]);
 
   function handleLog() {
@@ -595,83 +568,22 @@ export default function AnatomicalAvatar({
               )}
             </div>
 
-            {/* Custom Aerospace Floating Dropdown */}
-            <div className="relative" ref={dropdownRef}>
-              <button
-                type="button"
-                onClick={() => setDropdownOpen((prev) => !prev)}
-                className={`w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl border text-left text-xs transition duration-150 cursor-pointer shadow-sm ${
-                  dropdownOpen
-                    ? "bg-white dark:bg-slate-900 border-sky-500 dark:border-cyan-400/80 ring-2 ring-sky-500/20 text-slate-900 dark:text-white"
-                    : selectedSymptom
-                      ? "bg-white dark:bg-slate-900/90 border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 hover:border-slate-400"
-                      : "bg-slate-50 dark:bg-slate-900/60 border-slate-300 dark:border-slate-700/80 text-slate-500 dark:text-slate-400 hover:border-slate-400 hover:text-slate-700"
-                }`}
-                aria-haspopup="listbox"
-                aria-expanded={dropdownOpen}
+            {/* Accessible Native Symptom Selector */}
+            <div className="mt-1">
+              <select
+                id="symptom-select-dropdown"
+                value={selectedSymptom}
+                onChange={(e) => setSelectedSymptom(e.target.value)}
+                className="w-full text-xs"
+                aria-label={`Select symptom note for ${zoneInfo.laymanLabel}`}
               >
-                <div className="flex items-center gap-2.5 truncate">
-                  <Activity
-                    size={14}
-                    className={selectedSymptom ? "text-sky-600 dark:text-cyan-400 shrink-0" : "text-slate-400 shrink-0"}
-                  />
-                  <span className="truncate">
-                    {selectedSymptom || `Select observed symptom for ${zoneInfo.laymanLabel}...`}
-                  </span>
-                </div>
-                <ChevronDown
-                  size={14}
-                  className={`text-slate-400 transition-transform duration-200 shrink-0 ${
-                    dropdownOpen ? "rotate-180 text-sky-600 dark:text-cyan-400" : ""
-                  }`}
-                />
-              </button>
-
-              {dropdownOpen && (
-                <div
-                  role="listbox"
-                  className="absolute left-0 right-0 top-full mt-1.5 z-50 p-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/90 rounded-xl shadow-[0_16px_36px_rgba(0,0,0,0.18)] max-h-60 overflow-y-auto space-y-1 animate-in fade-in zoom-in-95 duration-100"
-                >
-                  <div className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-slate-200 dark:border-slate-800/80 mb-1">
-                    Select Symptom · {zoneInfo.laymanLabel}
-                  </div>
-                  {zoneInfo.symptoms.map((symptom) => {
-                    const isSelected = selectedSymptom === symptom;
-                    return (
-                      <button
-                        key={symptom}
-                        type="button"
-                        role="option"
-                        aria-selected={isSelected}
-                        onClick={() => {
-                          setSelectedSymptom(symptom);
-                          setDropdownOpen(false);
-                        }}
-                        className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg text-xs text-left transition cursor-pointer ${
-                          isSelected
-                            ? "bg-sky-50 dark:bg-cyan-950/80 border border-sky-300 dark:border-cyan-500/40 text-sky-800 dark:text-cyan-200 font-medium"
-                            : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white"
-                        }`}
-                      >
-                        <span className="flex-1 leading-snug">{symptom}</span>
-                        {isSelected && <Check size={14} className="text-sky-600 dark:text-cyan-400 shrink-0" />}
-                      </button>
-                    );
-                  })}
-                  {selectedSymptom && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSelectedSymptom("");
-                        setDropdownOpen(false);
-                      }}
-                      className="w-full text-center py-1.5 text-[11px] font-mono text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 transition border-t border-slate-200 dark:border-slate-800/80 mt-1 cursor-pointer"
-                    >
-                      Clear selection
-                    </button>
-                  )}
-                </div>
-              )}
+                <option value="">Select observed note for {zoneInfo.laymanLabel}...</option>
+                {zoneInfo.symptoms.map((symptom) => (
+                  <option key={symptom} value={symptom}>
+                    {symptom}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Severity Rating Selector & Action Row */}
