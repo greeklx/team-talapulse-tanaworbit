@@ -371,10 +371,10 @@ body .app-shell.touch-mode main {
 }
 .measurement-picker > button small {
   display: block;
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 400;
   color: #597c9e;
-  line-height: 1.8;
+  line-height: 1.6;
   margin-top: 6px;
   max-width: 160px;
 }
@@ -407,7 +407,7 @@ body .app-shell.touch-mode main {
   max-width: 490px;
 }
 .measurement-walkthrough-head .eyebrow {
-  font-size: 7px;
+  font-size: 11px;
 }
 .measurement-example {
   display: grid;
@@ -422,7 +422,7 @@ body .app-shell.touch-mode main {
 }
 .measurement-example > div > span {
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 11px;
   color: #759fc0;
   letter-spacing: 0.75px;
 }
@@ -499,7 +499,7 @@ body .app-shell.touch-mode main {
 .measurement-step > span {
   color: #5c8aad;
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 1px;
 }
 .measurement-step h3 {
@@ -541,7 +541,7 @@ body .app-shell.touch-mode main {
 }
 .measurement-limits > span {
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 11px;
   color: #9babbd;
   letter-spacing: 0.8px;
 }
@@ -651,7 +651,7 @@ body .app-shell.touch-mode main {
 }
 .routine-summary > div > span {
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 11px;
   letter-spacing: 0.9px;
   color: #7699b9;
 }
@@ -786,7 +786,7 @@ body .app-shell.touch-mode main {
   display: block;
   font-family: var(--font-mono);
   color: #537e9f;
-  font-size: 7px;
+  font-size: 11px;
   line-height: 1.9;
   letter-spacing: 0.8px;
 }
@@ -876,7 +876,7 @@ body .app-shell.touch-mode main {
 .body-schematic-caption {
   text-align: center;
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.7px;
   color: #5a83a4;
   padding: 5px 18px 23px;
@@ -957,7 +957,7 @@ body .app-shell.touch-mode main {
 .body-region-list > button > span:first-child {
   font-family: var(--font-mono);
   color: #5988af;
-  font-size: 9px;
+  font-size: 11px;
 }
 .body-region-list > button > span:last-child {
   margin-left: auto;
@@ -992,7 +992,7 @@ body .app-shell.touch-mode main {
 .context-boundary > span {
   color: #5f85a7;
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 11px;
   letter-spacing: 0.9px;
 }
 .context-facts strong {
@@ -1035,7 +1035,7 @@ body .app-shell.touch-mode main {
   display: inline-block;
   color: #5f87aa;
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 11px;
   line-height: 1.9;
   letter-spacing: 0.7px;
 }
@@ -1061,7 +1061,7 @@ body .app-shell.touch-mode main {
 }
 .hazard-card > div > span {
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 11px;
   color: #6585a5;
   letter-spacing: 0.7px;
 }
@@ -1084,7 +1084,7 @@ body .app-shell.touch-mode main {
   display: block;
   color: #6b90b3;
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 11px;
   letter-spacing: 0.85px;
   line-height: 1.8;
 }
@@ -1133,9 +1133,9 @@ body .app-shell.touch-mode main {
 .evidence-table-wrap thead th {
   color: #7091b4;
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 11px;
   letter-spacing: 0.6px;
-  font-weight: 400;
+  font-weight: 500;
 }
 .evidence-table-wrap th,
 .evidence-table-wrap td {
@@ -1145,13 +1145,13 @@ body .app-shell.touch-mode main {
   line-height: 1.9;
 }
 .evidence-table-wrap tbody th {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   color: #afc8e2;
 }
 .evidence-table-wrap td {
   color: #8aa6c3;
-  font-size: 10px;
+  font-size: 12px;
 }
 .evidence-table-wrap td > span {
   background: #1d3d5355;
@@ -1159,12 +1159,12 @@ body .app-shell.touch-mode main {
   padding: 5px 7px;
   border-radius: 4px;
   color: #85b4c7;
-  font-size: 8px;
+  font-size: 11px;
   white-space: nowrap;
 }
 .evidence-table-wrap code {
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 11px;
   color: #627f9f;
 }
 .evidence-rule-note {
@@ -1197,7 +1197,7 @@ body .app-shell.touch-mode main {
 .source-reference-kind {
   display: block;
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 11px;
   color: #5e89ad;
   letter-spacing: 1px;
   line-height: 1.8;
@@ -1210,7 +1210,7 @@ body .app-shell.touch-mode main {
   margin-top: 13px;
 }
 .source-reference-card p {
-  font-size: 11px;
+  font-size: 12px;
   color: #7e9cb9;
   line-height: 1.95;
   margin-top: 13px;
@@ -1219,7 +1219,7 @@ body .app-shell.touch-mode main {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 11px;
+  font-size: 12px;
   color: #94c1e4;
   min-height: 44px;
   margin-top: 14px;
@@ -1228,7 +1228,7 @@ body .app-shell.touch-mode main {
   display: block;
   color: #5a7e9e;
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.9;
   margin-top: 25px;
   overflow-wrap: anywhere;
@@ -1241,7 +1241,7 @@ body .app-shell.touch-mode main {
 }
 .toolkit-scope-note > span {
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 11px;
   color: #8a9db4;
   letter-spacing: 1px;
 }
@@ -1667,10 +1667,10 @@ body .app-shell.touch-mode main {
   min-height: 44px;
 }
 .touch-mode .next-step-kicker {
-  font-size: 7px;
+  font-size: 11px;
 }
 .touch-mode .mission-context-strip > label {
-  font-size: 8px;
+  font-size: 11px;
 }
 .touch-mode .mission-context-strip select {
   font-size: 13px;
@@ -1920,7 +1920,7 @@ body .app-shell.touch-mode main {
     width: 100%;
     flex: auto;
     display: block;
-    font-size: 7px;
+    font-size: 11px;
   }
   .mission-context-strip select,
   .touch-mode .mission-context-strip select {
@@ -2064,8 +2064,8 @@ body .app-shell.touch-mode main {
   }
   .measurement-picker > button small,
   .touch-mode .measurement-picker > button small {
-    font-size: 8px;
-    line-height: 1.9;
+    font-size: 11px;
+    line-height: 1.6;
   }
   .measurement-walkthrough {
     padding: 22px 17px;
@@ -2150,7 +2150,7 @@ body .app-shell.touch-mode main {
   .routine-task-status {
     grid-column: 2;
     padding-top: 0;
-    font-size: 7px;
+    font-size: 11px;
   }
   .routine-task h3,
   .touch-mode .routine-task h3 {
@@ -2249,7 +2249,7 @@ body .app-shell.touch-mode main {
     padding: 20px 16px;
   }
   .evidence-summary > section > span {
-    font-size: 6px;
+    font-size: 11px;
   }
   .evidence-summary strong {
     font-size: 29px;
@@ -2319,7 +2319,7 @@ body .app-shell.touch-mode main {
     font-size: 13px;
   }
   .guide-message-author {
-    font-size: 7px;
+    font-size: 11px;
   }
   .guide-message-sources > a,
   .guide-message-sources > span {
@@ -2402,10 +2402,26 @@ body .app-shell.touch-mode main {
   color: #0f172a !important;
 }
 
+[data-theme="light"] .context-facts {
+  border-top-color: #e2e8f0 !important;
+}
+
 [data-theme="light"] .hazard-card {
   background: #ffffff !important;
   border-color: #e2e8f0 !important;
   color: #0f172a !important;
+}
+
+[data-theme="light"] .hazard-card > div:not(.toolkit-source-links) {
+  border-top-color: #e2e8f0 !important;
+}
+
+[data-theme="light"] .hazard-card > div > span {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .hazard-card > div > p {
+  color: #475569 !important;
 }
 
 [data-theme="light"] .hazard-card.relevant {
@@ -2457,15 +2473,58 @@ body .app-shell.touch-mode main {
   color: #64748b !important;
 }
 
-[data-theme="light"] .body-region-item {
+/* --- Body Overview Region List & Details --- */
+[data-theme="light"] .body-region-detail dl > div {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .body-region-detail dt {
+  color: #64748b !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+
+[data-theme="light"] .body-region-detail dd {
+  color: #0284c7 !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .body-region-detail > p {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .body-region-list {
   background: #ffffff !important;
   border-color: #e2e8f0 !important;
+}
+
+[data-theme="light"] .body-region-list > button {
+  background: #ffffff !important;
+  color: #334155 !important;
+  border-top-color: #f1f5f9 !important;
+}
+
+[data-theme="light"] .body-region-list > button:hover {
+  background: #f8fafc !important;
   color: #0f172a !important;
 }
 
-[data-theme="light"] .body-region-item.selected {
+[data-theme="light"] .body-region-list > button.selected {
   background: #f0f9ff !important;
-  border-color: #0284c7 !important;
+  color: #0369a1 !important;
+  font-weight: 600 !important;
+  border-left: 4px solid #0284c7 !important;
+}
+
+[data-theme="light"] .body-region-list > button > span:first-child {
+  color: #0284c7 !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
 }
 
 [data-theme="light"] .routine-task {
@@ -2499,15 +2558,102 @@ body .app-shell.touch-mode main {
   color: #0f172a !important;
 }
 
-[data-theme="light"] .evidence-table th {
-  background: #f1f5f9 !important;
-  color: #475569 !important;
-  border-bottom-color: #cbd5e1 !important;
+/* --- Evidence Summary Cards --- */
+[data-theme="light"] .evidence-summary > section {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
-[data-theme="light"] .evidence-table td {
-  border-bottom-color: #f1f5f9 !important;
-  color: #1e293b !important;
+[data-theme="light"] .evidence-summary > section > span {
+  color: #64748b !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+[data-theme="light"] .evidence-summary strong {
+  color: #0284c7 !important;
+  font-size: 34px !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .evidence-summary strong > small {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .evidence-summary .evidence-not-validated {
+  color: #475569 !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="light"] .evidence-summary > section > small {
+  color: #64748b !important;
+}
+
+/* --- Evidence Table & Columns --- */
+[data-theme="light"] .evidence-table-wrap thead {
+  background: #f8fafc !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .evidence-table-wrap thead th {
+  background: #f8fafc !important;
+  color: #334155 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .evidence-table-wrap th,
+[data-theme="light"] .evidence-table-wrap td {
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+[data-theme="light"] .evidence-table-wrap tbody th {
+  color: #0f172a !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="light"] .evidence-table-wrap td {
+  color: #334155 !important;
+  font-size: 13px !important;
+}
+
+[data-theme="light"] .evidence-table-wrap td > span {
+  background: #e0f2fe !important;
+  border: 1px solid #bae6fd !important;
+  color: #0369a1 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="light"] .evidence-table-wrap code {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
+  font-size: 11px !important;
+}
+
+[data-theme="light"] .evidence-rule-note {
+  background: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .evidence-rule-note strong {
+  color: #0f172a !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="light"] .evidence-rule-note p {
+  color: #64748b !important;
+  font-size: 12px !important;
 }
 
 /* --- Hero Banner & Educational Guidance --- */
