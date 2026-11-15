@@ -122,6 +122,39 @@ describe("tanaworbit-api", () => {
     expect(body.error).toBe("missing_input");
   });
 
+
+
+
+it("rejects negative heart rate measurements", async () => {
+  const response = await app.request(
+    "/api/evaluate?crewId=crew-ef&heart=-10&systolic=120&diastolic=73&sleep=7.2&fatigue=1.8",
+    {},
+    env
+  );
+
+  expect(response.status).toBe(400);
+});
+
+it("rejects sleep duration above 24 hours", async () => {
+  const response = await app.request(
+      "/api/evaluate?crewId=crew-ef&heart=75&systolic=120&diastolic=73&sleep=25&fatigue=2",
+      {},
+      env
+  );
+  expect(response.status).toBe(400);
+})
+
+it("rejects fatigue scores above 5", async () => {
+  const response = await app.request(
+     "/api/evaluate?crewId=crew-ef&heart=75&systolic=120&diastolic=73&sleep=7.2&fatigue=6",
+     {},
+     env
+  );
+
+  expect(response.status).toBe(400);
+});
+
+
   it("publishes a 14-day baseline for one crew member", async () => {
     const response = await app.request("/api/trends?crewId=crew-ef", {}, env);
     const body = await read<{

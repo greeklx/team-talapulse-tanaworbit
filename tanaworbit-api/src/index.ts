@@ -1,5 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { isValidHeartRate,  isValidSleepDuration, isValidFatigue} from "./validation";
+
 import { accuracyReport, judgeReading, trendFor } from "./accuracy";
 import {
   DISCLAIMER,
@@ -232,6 +234,41 @@ app.get("/api/evaluate", (c) => {
         400,
       );
     }
+
+    if (field === "heart" && !isValidHeartRate(value)) {
+      return c.json(
+        published({
+          error: "invalid_input",
+          field,
+          message: "Heart Rate Must be greater than zero.",
+        }),
+        400,
+      );
+    }
+
+    if (field === "sleep" && !isValidSleepDuration(value)) {
+      return c.json(
+        published({
+          error: "invalid_input",
+          field,
+          message: "Sleep Duration must be between 0 and 24 hours",
+        }),
+        400,
+      );
+    }
+    
+
+    if (field === "fatigue" && !isValidFatigue(value)) {
+      return c.json(
+        published({
+          error: "invalid_input",
+          field,
+          message: "Fatigue score must be between 1 and 5.",
+        }),
+        400,
+      );
+    }
+
     reading[field] = value;
   }
   const judged = judgeReading(crewId, reading);
