@@ -7,6 +7,7 @@ import {
   biodata,
   cabinConditions,
   crew,
+  type CrewMember,
   crewStatus,
   healthRecords,
   initialExercises,
@@ -84,16 +85,30 @@ export function PortalHome() {
 
 export function AstronautLogin() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  if (loading) {
+    return (
+      <div className="formal-loading-screen" role="status" aria-live="polite">
+        <div className="formal-loading-box">
+          <div className="formal-spinner" />
+          <p>Loading flight console...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <>
-      <DemoSignIn
-        initialCrew={0}
-        onEnter={(index) => {
+    <DemoSignIn
+      initialCrew={0}
+      onEnter={(index) => {
+        setLoading(true);
+        setTimeout(() => {
           writeSession({ kind: "astronaut", crewId: crew[index].id });
           navigate("/Astronaut");
-        }}
-      />
-    </>
+        }, 500);
+      }}
+    />
   );
 }
 

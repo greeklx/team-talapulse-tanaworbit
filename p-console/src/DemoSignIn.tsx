@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { crew, crewStatus, latestRecord, mission, orbitalConditions } from "./data";
-import { Clock } from "lucide-react";
+import { Clock, Moon, Sun } from "lucide-react";
 import "./demo.css";
 
 export default function DemoSignIn({
@@ -19,6 +19,22 @@ export default function DemoSignIn({
   const storedOrbit = orbitalConditions[orbitalConditions.length - 1];
   const inputRef = useRef<HTMLInputElement>(null);
   const person = crew[selected] || crew[0];
+
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("tanaworbit_theme") as "dark" | "light") || "dark";
+    }
+    return "dark";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("tanaworbit_theme", theme);
+  }, [theme]);
+
+  function toggleTheme() {
+    setTheme((t) => (t === "dark" ? "light" : "dark"));
+  }
 
   // Animated spacecraft orbital trajectory along stored mission ground track
   useEffect(() => {
@@ -297,10 +313,22 @@ export default function DemoSignIn({
       <section className="access-console" aria-labelledby="access-title">
         <div className="access-console-top">
           <span>Flight Deck Operations</span>
-          <span className="access-clock">
-            <Clock size={14} aria-hidden="true" />
-            {utcTime || "UTC"}
-          </span>
+          <div className="access-top-actions">
+            <span className="access-clock">
+              <Clock size={14} aria-hidden="true" />
+              {utcTime || "UTC"}
+            </span>
+            <button
+              type="button"
+              className="theme-toggle-btn"
+              onClick={toggleTheme}
+              aria-label="Toggle visual theme"
+              title={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+            >
+              {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+              <span>{theme === "dark" ? "Light" : "Dark"}</span>
+            </button>
+          </div>
         </div>
 
         <div className="access-heading">

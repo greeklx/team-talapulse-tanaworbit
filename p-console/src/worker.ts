@@ -6,6 +6,11 @@ interface Env {
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+    if (url.pathname === "/" || url.pathname === "") {
+      return Response.redirect(`${url.origin}/a-login`, 302);
+    }
+
     const response = await env.ASSETS.fetch(request);
 
     // Defense-in-depth HTTP security headers
