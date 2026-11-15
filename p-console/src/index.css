@@ -5249,6 +5249,21 @@ textarea::placeholder {
   }
 }
 @media (max-width: 600px) {
+  .topbar {
+    padding: 0 12px;
+  }
+  .topbar-left {
+    min-width: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+  }
+  .breadcrumbs {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+  }
   .display-control > span {
     display: none;
   }
@@ -6546,7 +6561,12 @@ textarea::placeholder {
   bottom: 96px;
   right: 18px;
   left: auto;
-  padding: 8px 14px;
+  padding: 0;
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
+  min-width: 48px;
+  justify-content: center;
   border-radius: 9999px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }

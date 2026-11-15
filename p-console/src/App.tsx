@@ -30,7 +30,6 @@ import {
   Bell,
   Download,
   Plus,
-  Minus,
   X,
   ChevronRight,
   ShieldAlert,
@@ -883,13 +882,6 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
   const [guideLauncherHidden, setGuideLauncherHidden] = useState(() => {
     try {
       return localStorage.getItem("tanaw_guide_launcher_hidden") === "true";
-    } catch {
-      return false;
-    }
-  });
-  const [guideLauncherMinimized, setGuideLauncherMinimized] = useState(() => {
-    try {
-      return localStorage.getItem("tanaw_guide_launcher_minimized") === "true";
     } catch {
       return false;
     }
@@ -3068,8 +3060,8 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                   <label className="settings-label">
                     Floating Tanaw Guide
                     <select
-                      aria-label="Floating Tanaw Guide position and visibility"
-                      value={guideLauncherHidden ? "hidden" : guideLauncherMinimized ? "minimized" : "visible"}
+                      aria-label="Floating Tanaw Guide visibility"
+                      value={guideLauncherHidden ? "hidden" : "visible"}
                       onChange={(e) => {
                         const val = e.target.value;
                         if (val === "hidden") {
@@ -3077,25 +3069,15 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                           try {
                             localStorage.setItem("tanaw_guide_launcher_hidden", "true");
                           } catch {}
-                        } else if (val === "minimized") {
-                          setGuideLauncherHidden(false);
-                          setGuideLauncherMinimized(true);
-                          try {
-                            localStorage.removeItem("tanaw_guide_launcher_hidden");
-                            localStorage.setItem("tanaw_guide_launcher_minimized", "true");
-                          } catch {}
                         } else {
                           setGuideLauncherHidden(false);
-                          setGuideLauncherMinimized(false);
                           try {
                             localStorage.removeItem("tanaw_guide_launcher_hidden");
-                            localStorage.removeItem("tanaw_guide_launcher_minimized");
                           } catch {}
                         }
                       }}
                     >
-                      <option value="visible">Visible (bottom right)</option>
-                      <option value="minimized">Minimized (small bubble)</option>
+                      <option value="visible">Visible (bottom right circle)</option>
                       <option value="hidden">Hidden</option>
                     </select>
                   </label>
@@ -3140,96 +3122,34 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
         </div>
       )}
       {!guideLauncherHidden && (
-        <div
-          className={`tanaw-guide-launcher ${display.touch ? "above-dock" : ""} ${
-            guideLauncherMinimized ? "is-minimized" : ""
-          }`}
+        <button
+          type="button"
+          className={`tanaw-guide-launcher ${display.touch ? "above-dock" : ""}`}
           hidden={guideOpen}
+          aria-label="Tanaw Guide · Written answers"
+          title="Tanaw Guide · Written answers"
+          onClick={() => {
+            setModal(null);
+            setSidebarOpen(false);
+            setGuideOpen(true);
+          }}
         >
-          <button
-            type="button"
-            className="tanaw-guide-launcher-main"
-            aria-label="Open Tanaw Guide"
-            title={guideLauncherMinimized ? "Open Tanaw Guide (click to open)" : "Open Tanaw Guide"}
-            onClick={() => {
-              setModal(null);
-              setSidebarOpen(false);
-              setGuideOpen(true);
-            }}
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            aria-hidden="true"
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              aria-hidden="true"
-            >
-              <path d="M21 11a8 8 0 0 1-8 8H7l-5 3V11a9 9 0 0 1 19 0Z" />
-              <path d="M6 11h3l2-4 3 8 2-4h3" />
-            </svg>
-            {!guideLauncherMinimized && (
-              <span>
-                Tanaw Guide<small>Written answers</small>
-              </span>
-            )}
-          </button>
-          {!guideLauncherMinimized ? (
-            <div className="tanaw-guide-launcher-actions">
-              <button
-                type="button"
-                className="tanaw-guide-action-btn"
-                aria-label="Minimize Tanaw Guide launcher"
-                title="Minimize launcher"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setGuideLauncherMinimized(true);
-                  try {
-                    localStorage.setItem("tanaw_guide_launcher_minimized", "true");
-                  } catch {}
-                }}
-              >
-                <Minus size={13} />
-              </button>
-              <button
-                type="button"
-                className="tanaw-guide-action-btn"
-                aria-label="Hide Tanaw Guide launcher"
-                title="Hide launcher"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setGuideLauncherHidden(true);
-                  try {
-                    localStorage.setItem("tanaw_guide_launcher_hidden", "true");
-                  } catch {}
-                  notify(
-                    "Tanaw Guide launcher hidden. Open anytime from the sidebar or Display settings.",
-                    "info",
-                  );
-                }}
-              >
-                <X size={13} />
-              </button>
-            </div>
-          ) : (
-            <button
-              type="button"
-              className="tanaw-guide-restore-pill"
-              aria-label="Expand Tanaw Guide launcher"
-              title="Expand launcher"
-              onClick={(e) => {
-                e.stopPropagation();
-                setGuideLauncherMinimized(false);
-                try {
-                  localStorage.removeItem("tanaw_guide_launcher_minimized");
-                } catch {}
-              }}
-            >
-              <Maximize2 size={10} />
-            </button>
-          )}
-        </div>
+            <path d="M21 11a8 8 0 0 1-8 8H7l-5 3V11a9 9 0 0 1 19 0Z" />
+            <path d="M6 11h3l2-4 3 8 2-4h3" />
+          </svg>
+          <span className="tanaw-guide-tooltip" role="tooltip">
+            Tanaw Guide <small>Written answers</small>
+          </span>
+        </button>
       )}
       {guideOpen && (
         <FeatureBoundary

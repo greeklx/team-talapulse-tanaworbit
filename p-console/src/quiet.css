@@ -345,31 +345,31 @@ h1,
 }
 
 .tanaw-guide-launcher {
-  color: var(--on-accent);
-  background: var(--accent);
-  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  transition: all 0.2s ease;
-}
-
-.tanaw-guide-launcher:hover {
-  background: var(--accent);
-  filter: brightness(1.08);
-  transform: translateY(-1px);
-}
-
-.tanaw-guide-launcher.is-minimized {
+  color: var(--on-accent, #ffffff) !important;
+  background: var(--accent) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 18px rgba(2, 132, 199, 0.38) !important;
   border-radius: 9999px !important;
-  width: 44px !important;
-  min-height: 44px !important;
+  width: 48px !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  min-width: 48px !important;
   padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease !important;
 }
 
-.tanaw-guide-launcher small {
-  color: var(--on-accent);
-  opacity: 0.85;
-  font-size: 10px;
+.tanaw-guide-launcher:hover,
+.tanaw-guide-launcher:focus-visible {
+  filter: brightness(1.1);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 22px rgba(2, 132, 199, 0.48) !important;
+}
+
+.tanaw-guide-launcher:active {
+  transform: translateY(0) scale(0.96);
 }
 
 .main-shell > main,
