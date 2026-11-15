@@ -325,6 +325,21 @@
 .sidebar-bottom > .nav-item > svg:last-child:not(:first-child) {
   margin-left: auto;
 }
+.sidebar-settings-dropdown {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0 4px 8px;
+  gap: 1px;
+}
+.sidebar-settings-dropdown .nav-item {
+  font-size: 10.5px;
+  min-height: 34px;
+  padding: 6px 10px;
+  opacity: 0.85;
+}
+.sidebar-settings-dropdown .nav-item:hover {
+  opacity: 1;
+}
 .sidebar-user {
   border-top: 1px solid var(--border);
   margin: 16px -12px 0;
@@ -343,6 +358,26 @@
   font-weight: 400;
   font-size: 9px;
   color: var(--muted);
+}
+@media (max-height: 850px) {
+  .mission-mini {
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    gap: 6px;
+  }
+  .mission-mini .mini-orbit {
+    display: none;
+  }
+  .mission-mini .mission-progress {
+    display: none;
+  }
+  .sidebar-bottom {
+    padding: 8px 10px;
+  }
+  .sidebar-user {
+    margin: 6px -10px 0;
+    padding: 8px 10px;
+  }
 }
 .sidebar-user > button {
   margin-left: auto;
@@ -3249,11 +3284,33 @@ textarea::placeholder {
 @media (max-width: 760px) {
   .sidebar {
     transform: translateX(-100%);
-    width: 232px;
+    width: 250px;
     transition: transform 0.2s;
   }
   .sidebar.is-open {
     transform: translateX(0);
+  }
+  .sidebar .mission-mini {
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    gap: 6px;
+  }
+  .sidebar .mission-mini .mini-orbit {
+    display: none;
+  }
+  .sidebar .mission-mini .mission-progress {
+    display: none;
+  }
+  .sidebar .sidebar-bottom {
+    padding: 8px 10px;
+  }
+  .sidebar .sidebar-user {
+    margin: 6px -10px 0;
+    padding: 8px 10px;
+  }
+  .sidebar .sidebar-sim-btn {
+    margin: 4px 0 6px;
+    padding: 6px 10px;
   }
   .sidebar-overlay {
     position: fixed;
@@ -4582,9 +4639,28 @@ textarea::placeholder {
 .touch-mode .sidebar .sidebar-bottom {
   flex-shrink: 0;
   margin-top: auto;
-  padding: 12px 10px;
-  padding-bottom: max(24px, env(safe-area-inset-bottom));
+  padding: 8px 10px;
+  padding-bottom: max(14px, env(safe-area-inset-bottom));
   border-top: 1px solid var(--border);
+}
+.touch-mode .sidebar .mission-mini {
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  gap: 6px;
+}
+.touch-mode .sidebar .mission-mini .mini-orbit {
+  display: none;
+}
+.touch-mode .sidebar .mission-mini .mission-progress {
+  display: none;
+}
+.touch-mode .sidebar .sidebar-user {
+  margin: 6px -10px 0;
+  padding: 8px 10px;
+}
+.touch-mode .sidebar .sidebar-sim-btn {
+  margin: 4px 0 6px;
+  padding: 6px 10px;
 }
 .touch-mode .sidebar-user button {
   min-width: 48px;

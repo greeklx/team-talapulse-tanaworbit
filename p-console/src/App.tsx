@@ -861,6 +861,7 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
     typeof window !== "undefined" ? window.matchMedia("(max-width: 760px)").matches : false,
   );
   const [noticesOpen, setNoticesOpen] = useState(false);
+  const [sidebarSettingsOpen, setSidebarSettingsOpen] = useState(false);
   const [accountNote, setAccountNote] = useState<string | null>(null);
   const [accountNoteSeen, setAccountNoteSeen] = useState(true);
   const noticeRef = useRef<HTMLDivElement>(null);
@@ -1011,7 +1012,7 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
       const slug = PAGE_TO_HASH[next] || "overview";
       window.location.hash = slug;
     }
-    if (window.innerWidth <= 760) setSidebarOpen(false);
+    if (window.innerWidth <= 760 || display.touch) setSidebarOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -1852,7 +1853,7 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
     localStorage.setItem("tanaworbit_onboarded", "1");
     setModal(null);
     setTourIndex(0);
-    if (window.innerWidth <= 760) setSidebarOpen(false);
+    if (window.innerWidth <= 760 || display.touch) setSidebarOpen(false);
   }
 
   function pointAtMenu(target: Page) {
@@ -1990,17 +1991,17 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                     >
                       <Icon name={icon} size={17} />
                       <span>{label || target}</span>
-                      {target === "Alerts & Attention" && (
-                        <b className="nav-count">
-                          {
-                            alerts.filter(
-                              (a) =>
-                                a.status !== "Stable" &&
-                                !reviewed.includes(`${selectedCrew}-${a.id}`),
-                            ).length
-                          }
-                        </b>
-                      )}
+                      {target === "Alerts & Attention" &&
+                        (() => {
+                          const flagCount = alerts.filter(
+                            (a) =>
+                              a.status !== "Stable" &&
+                              !reviewed.includes(`${selectedCrew}-${a.id}`),
+                          ).length;
+                          return flagCount > 0 ? (
+                            <b className="nav-count">{flagCount}</b>
+                          ) : null;
+                        })()}
                     </button>
                   ))}
                 </div>
@@ -2029,31 +2030,41 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                 <span>of {mission.durationDays}</span>
               </div>
             </div>
-            <button className="nav-item" onClick={() => openModal("settings")}>
+            <button className="nav-item" onClick={() => setSidebarSettingsOpen(o => !o)}>
               <Icon name="settings" size={18} />
-              Display
+              Settings
+              <span style={{ marginLeft: "auto", fontSize: 10, opacity: 0.6 }}>{sidebarSettingsOpen ? "▴" : "▾"}</span>
             </button>
-            <button className="nav-item" onClick={() => openModal("export")}>
-              <Icon name="download" size={18} />
-              Export summary
-            </button>
-            <button className="nav-item" onClick={() => openModal("about")}>
-              <Icon name="help" size={18} />
-              About
-              <Icon name="external" size={13} />
-            </button>
-            <button
-              className="nav-item"
-              onClick={() => {
-                setModal(null);
-                setSidebarOpen(false);
-                setGuideOpen(true);
-              }}
-              title="Open Tanaw Guide written answers"
-            >
-              <Icon name="book" size={18} />
-              Tanaw Guide
-            </button>
+            {sidebarSettingsOpen && (
+              <div className="sidebar-settings-dropdown">
+                <button className="nav-item" onClick={() => openModal("settings")}>
+                  <Icon name="settings" size={16} />
+                  Display
+                </button>
+                <button className="nav-item" onClick={() => openModal("export")}>
+                  <Icon name="download" size={16} />
+                  Export summary
+                </button>
+                <button className="nav-item" onClick={() => openModal("about")}>
+                  <Icon name="help" size={16} />
+                  About
+                  <Icon name="external" size={13} />
+                </button>
+                <button
+                  className="nav-item"
+                  onClick={() => {
+                    setModal(null);
+                    setSidebarOpen(false);
+                    setGuideOpen(true);
+                    setSidebarSettingsOpen(false);
+                  }}
+                  title="Open Tanaw Guide written answers"
+                >
+                  <Icon name="book" size={16} />
+                  Tanaw Guide
+                </button>
+              </div>
+            )}
             <button
               type="button"
               className="sidebar-sim-btn"
