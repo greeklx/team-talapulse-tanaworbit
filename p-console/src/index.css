@@ -42,12 +42,19 @@
   :root {
     font-family: var(--font-sans);
     color: #e7e4dc;
-    background: #191a1d;
+    background-color: var(--bg);
     font-synthesis: none;
     color-scheme: dark;
   }
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    background-color: var(--bg);
+  }
   body {
     min-width: 360px;
+    margin: 0;
   }
   button,
   a,

@@ -1,48 +1,57 @@
 /* Practice-crew door. The sample code is a public fixture, not a credential. */
+html,
+body {
+  background: var(--bg);
+  min-height: 100%;
+}
+[data-theme="light"] html,
+[data-theme="light"] body {
+  background: #f8fafc;
+}
+
 .demo-access {
+  min-height: 100vh;
   min-height: 100dvh;
   max-width: none;
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: minmax(280px, 0.85fr) minmax(440px, 1.15fr);
+  grid-template-columns: minmax(320px, 0.95fr) minmax(440px, 1.05fr);
   background: var(--bg);
   color: var(--text);
+  overflow-x: hidden;
 }
 .access-story {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100dvh;
-  overflow-y: auto;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 16px;
-  padding: 32px 38px 20px;
+  gap: 12px;
+  padding: clamp(16px, 2vh, 28px) clamp(22px, 2.5vw, 36px);
   border-right: 1px solid var(--border);
   background: var(--sidebar);
+  box-sizing: border-box;
 }
 .access-brand {
   position: relative;
   z-index: 2;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   color: var(--text);
-  font-size: 22px;
+  font-size: 19px;
   font-weight: 600;
   letter-spacing: -0.4px;
 }
 .access-brand > img {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
 }
 .access-brand small {
   display: block;
-  margin-top: 2px;
+  margin-top: 1px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 450;
   letter-spacing: 0;
 }
@@ -53,27 +62,27 @@
 }
 .access-story-copy > .eyebrow {
   color: var(--muted);
-  font-size: 13px;
-  letter-spacing: 0.04em;
+  font-size: 11.5px;
+  letter-spacing: 0.05em;
 }
 .access-story-copy h1 {
-  margin-top: 10px;
+  margin-top: 4px;
   color: var(--text);
-  font-size: clamp(32px, 3vw, 44px);
-  font-weight: 550;
-  line-height: 1.15;
-  letter-spacing: -0.8px;
+  font-size: clamp(22px, 2.1vw, 30px);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.6px;
 }
 .access-story-copy > p:not(.eyebrow) {
-  max-width: 42ch;
-  margin-top: 14px;
+  max-width: 44ch;
+  margin-top: 8px;
   color: var(--muted);
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 13.5px;
+  line-height: 1.45;
 }
 .access-mission {
-  margin-top: 28px;
-  padding: 16px;
+  margin-top: clamp(10px, 1.4vh, 16px);
+  padding: 10px 12px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--panel);
@@ -83,49 +92,49 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 .access-mission-top strong {
-  font-size: 15px;
-  font-weight: 550;
+  font-size: 13.5px;
+  font-weight: 600;
 }
 .access-mission-top span,
 .access-mission-facts span {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 11.5px;
 }
 .access-mission-facts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  gap: 6px;
 }
 .access-mission-facts div {
-  padding: 10px;
+  padding: 6px 8px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 6px;
   background: var(--bg);
 }
 .access-mission-facts strong {
   display: block;
-  margin-top: 4px;
-  font-size: 14px;
+  margin-top: 2px;
+  font-size: 13px;
   font-variant-numeric: tabular-nums;
 }
 .access-orbital-vista {
   position: relative;
   width: 100%;
-  flex: 1;
-  min-height: 260px;
-  max-height: 380px;
-  border-radius: 12px;
+  flex: 1 1 180px;
+  min-height: 150px;
+  max-height: clamp(200px, 28vh, 350px);
+  border-radius: 10px;
   border: 1px solid var(--border);
   overflow: hidden;
   background:
     linear-gradient(180deg, rgba(8, 13, 24, 0.92) 0%, rgba(8, 13, 24, 0.25) 45%, rgba(8, 13, 24, 0.9) 100%),
     url("/images/earth-orbit.jpg") center 65% / cover no-repeat;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  margin-top: 14px;
-  margin-bottom: 6px;
+  margin-top: clamp(6px, 1vh, 12px);
+  margin-bottom: 4px;
   pointer-events: none;
   display: flex;
   flex-direction: column;
@@ -270,24 +279,30 @@
 .access-story-footer {
   position: relative;
   z-index: 10;
-  margin: auto 0 0;
+  margin-top: auto;
+  padding-top: 8px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
 }
 .access-console {
   width: 100%;
-  max-width: 640px;
+  max-width: 580px;
   justify-self: center;
-  padding: 40px 48px 32px;
+  padding: clamp(16px, 2vh, 28px) clamp(20px, 2.5vw, 36px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  min-height: 100%;
 }
 .access-console-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 28px;
+  margin-bottom: clamp(8px, 1.2vh, 14px);
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
 }
 .access-clock {
   display: inline-flex;
@@ -304,12 +319,12 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 11px;
+  padding: 4px 10px;
   border-radius: 6px;
   border: 1px solid var(--border);
   background: var(--panel);
   color: var(--text);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -329,29 +344,29 @@
 }
 .access-heading h2 {
   color: var(--text);
-  font-size: 28px;
-  font-weight: 550;
+  font-size: clamp(19px, 2vw, 24px);
+  font-weight: 600;
   letter-spacing: -0.4px;
-  line-height: 1.25;
+  line-height: 1.2;
 }
 .access-heading > p {
-  margin-top: 8px;
+  margin-top: 3px;
   color: var(--muted);
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.4;
 }
 .access-crew-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin: 20px 0 12px;
+  gap: 6px;
+  margin: clamp(8px, 1.2vh, 12px) 0 8px;
 }
 .access-crew-grid > button {
-  min-height: 104px;
-  padding: 12px;
+  min-height: 64px;
+  padding: 8px 10px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-align: left;
   border: 1px solid var(--border);
   background: var(--panel);
@@ -371,14 +386,14 @@
   box-shadow: none;
 }
 .access-avatar {
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   flex-shrink: 0;
   display: grid;
   place-items: center;
   color: var(--on-accent);
   border-radius: 50%;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   overflow: hidden;
 }
@@ -394,22 +409,26 @@
 .access-crew-grid strong {
   display: block;
   color: var(--text);
-  font-size: 14px;
-  font-weight: 550;
-  line-height: 1.3;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
 }
 .access-crew-grid small,
 .access-crew-status {
   display: block;
-  margin-top: 2px;
+  margin-top: 1px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 11.5px;
   font-style: normal;
-  line-height: 1.4;
+  line-height: 1.3;
+}
+.access-crew-status {
+  font-size: 11px;
+  margin-top: 1px;
 }
 .access-pin-form {
-  margin-top: 16px;
-  padding-top: 16px;
+  margin-top: clamp(6px, 1vh, 10px);
+  padding-top: clamp(6px, 1vh, 10px);
   border-top: 1px solid var(--border);
 }
 .access-pin-form > label {
@@ -418,29 +437,29 @@
   justify-content: space-between;
   gap: 12px;
   color: var(--text);
-  font-size: 14px;
+  font-size: 13px;
 }
 .access-pin-form > label > small {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 11.5px;
   text-align: right;
 }
 .access-pin-slots {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin: 12px 0 16px;
+  margin: clamp(4px, 0.8vh, 8px) 0 clamp(6px, 1vh, 10px);
 }
 .access-pin-slot {
-  width: 48px;
-  height: 48px;
+  width: 38px;
+  height: 38px;
   display: grid;
   place-items: center;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--panel);
   color: var(--text);
-  font-size: 20px;
+  font-size: 18px;
 }
 .access-pin-slot.is-current {
   border-color: var(--accent);
@@ -451,18 +470,18 @@
 .access-keypad {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  max-width: 360px;
+  gap: 5px;
+  max-width: 300px;
   margin: 0 auto;
 }
 .access-keypad > button {
-  min-height: 48px;
+  min-height: 35px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 7px;
   background: var(--panel);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 16px;
+  font-size: 15px;
   display: grid;
   place-items: center;
   touch-action: manipulation;
@@ -472,7 +491,7 @@
   background: var(--panel-elevated);
 }
 .access-keypad > button.keypad-utility {
-  font-size: 14px;
+  font-size: 12.5px;
 }
 .access-keypad > button:disabled {
   opacity: 0.4;
@@ -482,57 +501,58 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  min-height: 64px;
+  min-height: 46px;
   margin-top: 4px;
-  padding: 12px;
+  padding: 6px 12px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--panel);
 }
 .access-demo-code > span {
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.3;
+  font-size: 12.5px;
+  line-height: 1.2;
 }
 .access-demo-code b {
   display: block;
-  margin-top: 2px;
+  margin-top: 1px;
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 16px;
+  font-size: 14.5px;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
 }
 .access-demo-code > .primary-button {
-  min-height: 40px;
-  min-width: 148px;
-  font-size: 14px;
+  min-height: 34px;
+  min-width: 130px;
+  font-size: 13px;
+  padding: 5px 12px;
 }
 .access-checking {
-  min-height: 20px;
-  margin: 12px 0 0;
+  min-height: 16px;
+  margin: 6px 0 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12.5px;
   text-align: center;
 }
 .access-error {
-  margin: 12px 0 0;
-  padding: 12px;
+  margin: 6px 0 0;
+  padding: 8px;
   border: 1px solid color-mix(in srgb, var(--red) 45%, var(--border));
   border-radius: 8px;
   background: color-mix(in srgb, var(--red) 12%, var(--panel));
   color: var(--text);
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 12.5px;
+  line-height: 1.4;
   text-align: center;
 }
 .access-disclaimer {
-  margin: 20px 0 0;
-  padding-top: 16px;
+  margin-top: auto;
+  padding-top: clamp(8px, 1.2vh, 14px);
   border-top: 1px solid var(--border);
   color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 11.5px;
+  line-height: 1.4;
 }
 
 /* Synthetic exercise records and manual session input. */
@@ -897,15 +917,15 @@
 
 @media (max-width: 1100px) {
   .access-story {
-    padding-left: 36px;
-    padding-right: 36px;
+    padding-left: 28px;
+    padding-right: 28px;
   }
   .access-console {
-    padding-left: 35px;
-    padding-right: 35px;
+    padding-left: 28px;
+    padding-right: 28px;
   }
   .demo-access {
-    grid-template-columns: minmax(0, 0.9fr) minmax(480px, 1fr);
+    grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
   }
   .exercise-columns {
     grid-template-columns: minmax(0, 1fr);
@@ -931,9 +951,6 @@
     padding: 24px 20px 18px;
     border-right: 0;
     border-bottom: 1px solid var(--border);
-  }
-  .access-story-footer {
-    display: none;
   }
   .access-brand {
     font-size: 20px;
@@ -979,10 +996,10 @@
   .access-orbital-vista {
     display: flex;
     width: 100%;
-    min-height: 200px;
-    height: 220px;
-    max-height: 250px;
-    margin-top: 14px;
+    min-height: 180px;
+    height: 200px;
+    max-height: 220px;
+    margin-top: 12px;
     margin-bottom: 6px;
     border-radius: 12px;
   }
@@ -1018,10 +1035,10 @@
     padding: 20px 16px 16px;
   }
   .access-orbital-vista {
-    min-height: 180px;
-    height: 195px;
-    max-height: 220px;
-    margin-top: 12px;
+    min-height: 170px;
+    height: 180px;
+    max-height: 200px;
+    margin-top: 10px;
     margin-bottom: 6px;
     border-radius: 10px;
   }
@@ -1048,14 +1065,15 @@
   .access-crew-grid > button {
     padding: 8px 10px;
     gap: 8px;
+    min-height: 68px;
   }
   .access-crew-grid > button:last-child:nth-child(odd) {
     grid-column: span 2;
   }
   .access-avatar {
-    width: 34px;
-    height: 34px;
-    font-size: 12px;
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
   }
   .access-crew-grid strong {
     font-size: 12.5px;
@@ -1070,17 +1088,17 @@
     margin: 8px 0 12px;
   }
   .access-pin-slot {
-    width: 42px;
-    height: 42px;
-    font-size: 18px;
+    width: 38px;
+    height: 38px;
+    font-size: 17px;
   }
   .access-keypad {
     gap: 6px;
     max-width: 300px;
   }
   .access-keypad > button {
-    min-height: 44px;
-    font-size: 17px;
+    min-height: 40px;
+    font-size: 16px;
   }
   .exercise-stat {
     padding: 18px;
