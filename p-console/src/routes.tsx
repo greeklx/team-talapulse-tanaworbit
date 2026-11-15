@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import DemoPage from "./DemoPage";
 import {
   AdminPortal,
   AstronautLogin,
@@ -12,6 +13,7 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/Astronaut" replace />} />
+        <Route path="/demo" element={<DemoPage />} />
         <Route path="/a-login" element={<AstronautLogin />} />
         <Route path="/b-login" element={<BackendLogin />} />
         <Route path="/Astronaut" element={<AstronautPortal />} />

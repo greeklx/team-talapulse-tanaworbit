@@ -120,6 +120,9 @@ function published<T>(body: T) {
   return { disclaimer: DISCLAIMER, synthetic: true, persistsCheckIns: false, ...body };
 }
 
+app.get("/demo", (c) => c.redirect("https://www.tanaw-orbit.app/demo", 302));
+app.get("/demo/", (c) => c.redirect("https://www.tanaw-orbit.app/demo", 302));
+
 app.get("/health", (c) =>
   c.json({
     ok: true,
