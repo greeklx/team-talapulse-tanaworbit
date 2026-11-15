@@ -837,41 +837,95 @@
 }
 @media (max-width: 900px) {
   .demo-access {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
   }
   .access-story {
+    position: static;
+    top: auto;
+    height: auto;
     min-height: 0;
-    padding: 28px 24px 20px;
+    overflow-y: visible;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 24px 20px 18px;
     border-right: 0;
     border-bottom: 1px solid var(--border);
+  }
+  .access-story-footer {
+    display: none;
   }
   .access-brand {
     font-size: 20px;
   }
   .access-brand > img {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
   .access-story-copy h1 {
-    font-size: 28px;
+    font-size: clamp(22px, 5vw, 28px);
+    margin-top: 6px;
+    line-height: 1.2;
+  }
+  .access-story-copy > p:not(.eyebrow) {
+    font-size: 13.5px;
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  .access-mission {
+    margin-top: 14px;
+    padding: 12px;
+  }
+  .access-mission-top {
+    margin-bottom: 8px;
   }
   .access-mission-facts {
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .access-mission-facts div {
+    padding: 6px 4px;
+    text-align: center;
+  }
+  .access-mission-facts span {
+    font-size: 11px;
+    display: block;
+  }
+  .access-mission-facts strong {
+    font-size: 13px;
+    margin-top: 2px;
   }
   .access-orbital-vista {
-    display: none;
+    display: flex;
+    width: 100%;
+    min-height: 200px;
+    height: 220px;
+    max-height: 250px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    border-radius: 12px;
+  }
+  .access-story-footer {
+    display: block;
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: var(--muted);
   }
   .access-console {
-    max-width: 640px;
-    margin: auto;
-    padding: 28px 24px 32px;
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 24px 20px 32px;
   }
   .access-console-top {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .access-demo-code {
     align-items: stretch;
     flex-direction: column;
+    gap: 8px;
+    padding: 10px 12px;
   }
   .access-demo-code > .primary-button {
     width: 100%;
@@ -879,23 +933,75 @@
 }
 @media (max-width: 600px) {
   .access-console {
-    padding: 25px 20px 30px;
+    padding: 20px 16px 28px;
   }
   .access-story {
-    padding: 23px 23px 20px;
+    padding: 20px 16px 16px;
+  }
+  .access-orbital-vista {
+    min-height: 180px;
+    height: 195px;
+    max-height: 220px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    border-radius: 10px;
+  }
+  .vista-top-hud {
+    padding: 6px 10px;
+  }
+  .vista-bottom-hud {
+    padding: 5px 10px;
+  }
+  .vista-top-hud span,
+  .vista-bottom-hud span {
+    font-size: 8.5px;
   }
   .access-heading h2 {
-    font-size: 24px;
+    font-size: 20px;
+  }
+  .access-heading p {
+    font-size: 13px;
   }
   .access-crew-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .access-crew-grid > button {
+    padding: 8px 10px;
+    gap: 8px;
   }
   .access-crew-grid > button:last-child:nth-child(odd) {
-    grid-column: auto;
+    grid-column: span 2;
   }
   .access-avatar {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
+    font-size: 12px;
+  }
+  .access-crew-grid strong {
+    font-size: 12.5px;
+  }
+  .access-crew-grid small {
+    font-size: 11px;
+  }
+  .access-crew-status {
+    font-size: 10.5px;
+  }
+  .access-pin-slots {
+    margin: 8px 0 12px;
+  }
+  .access-pin-slot {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+  .access-keypad {
+    gap: 6px;
+    max-width: 300px;
+  }
+  .access-keypad > button {
+    min-height: 44px;
+    font-size: 17px;
   }
   .exercise-stat {
     padding: 18px;

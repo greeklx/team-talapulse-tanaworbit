@@ -47,7 +47,7 @@ export default function DemoSignIn({
   }, []);
 
   useEffect(() => {
-    inputRef.current?.focus();
+    inputRef.current?.focus({ preventScroll: true });
 
     function handleKeyDown(e: KeyboardEvent) {
       if (checking) return;
@@ -94,7 +94,7 @@ export default function DemoSignIn({
         setChecking(false);
         setPin("");
         setError("That code does not match this person.");
-        inputRef.current?.focus();
+        inputRef.current?.focus({ preventScroll: true });
       }
     }, 280);
     return () => window.clearTimeout(timer);
@@ -104,14 +104,14 @@ export default function DemoSignIn({
     setSelected(index);
     setPin("");
     setError("");
-    inputRef.current?.focus();
+    inputRef.current?.focus({ preventScroll: true });
   }
 
   function digit(value: string) {
     if (checking) return;
     setError("");
     setPin((current) => (current + value).slice(0, 4));
-    inputRef.current?.focus();
+    inputRef.current?.focus({ preventScroll: true });
   }
 
   function openPage() {
@@ -357,7 +357,6 @@ export default function DemoSignIn({
             inputMode="numeric"
             pattern="[0-9]*"
             autoComplete="off"
-            autoFocus
             maxLength={4}
             value={pin}
             disabled={checking}
@@ -368,7 +367,7 @@ export default function DemoSignIn({
             className="sr-only"
             aria-label="Four-digit mission PIN"
           />
-          <div className="access-pin-slots" onClick={() => inputRef.current?.focus()}>
+          <div className="access-pin-slots" onClick={() => inputRef.current?.focus({ preventScroll: true })}>
             {[0, 1, 2, 3].map((slot) => {
               const filled = Boolean(pin[slot]);
               const current = pin.length === slot;
@@ -396,7 +395,7 @@ export default function DemoSignIn({
                     onClick={() => {
                       setPin("");
                       setError("");
-                      inputRef.current?.focus();
+                      inputRef.current?.focus({ preventScroll: true });
                     }}
                   >
                     Clear
