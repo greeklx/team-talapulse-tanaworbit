@@ -39,7 +39,7 @@ Context previews do not alter health values or thresholds. Walkthroughs explain 
 | Ella Nicole Fabro        | `3801`            |
 | Abrey Diane Barcellano   | `4202`            |
 | Hannah Faith Lopez       | `4503`            |
-| Gary Kenp Marasigan      | `4804`            |
+| Gary Ken Marasigan       | `4804`            |
 | Greek William Legaspi    | `5005`            |
 
 The sign-in screen exposes the selected profile's PIN and provides **Fill demo PIN**. Entering the matching four digits automatically opens the console. This is a navigation demonstration, **not authentication**. Do not replace these with real passwords, PINs, secrets, or personal information.

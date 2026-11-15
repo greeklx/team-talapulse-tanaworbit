@@ -20,7 +20,7 @@ export default function DemoSignIn({
   const inputRef = useRef<HTMLInputElement>(null);
   const person = crew[selected] || crew[0];
 
-  // Live real-time spacecraft orbital trajectory animation & fluctuating telemetry
+  // Animated spacecraft orbital trajectory along stored mission ground track
   useEffect(() => {
     let animId: number;
     let last = performance.now();
@@ -142,7 +142,7 @@ export default function DemoSignIn({
           <p className="eyebrow">MISSION OPERATIONS · EXPEDITION VII</p>
           <h1>Human Spaceflight Telemetry Console</h1>
           <p>
-            Operational physiological telemetry and in-flight health monitoring for Aster Expedition VII. Authenticate with assigned crew credentials to review longitudinal baselines and access autonomous countermeasures.
+            Stored example readings and longitudinal health tracking for Aster Expedition VII. Choose a crew profile to review longitudinal baselines and access educational countermeasures.
           </p>
 
           <div className="access-mission">
@@ -284,7 +284,7 @@ export default function DemoSignIn({
               </svg>
 
               <div className="vista-bottom-hud">
-                <span className="text-[10px] font-mono text-slate-300">TDRS RELAY: CONTINUOUS (99.4%)</span>
+                <span className="text-[10px] font-mono text-slate-300">TDRS RELAY: SIMULATED LINK</span>
                 <span className="text-[10px] font-mono text-slate-400">TRACK: 13.8° N, 121.2° E</span>
               </div>
             </div>
@@ -305,7 +305,7 @@ export default function DemoSignIn({
 
         <div className="access-heading">
           <h2 id="access-title">Select Crew Member</h2>
-          <p>Choose your astronaut profile and enter your designated 4-digit mission PIN.</p>
+          <p>Choose an astronaut profile and enter the designated 4-digit demo PIN to enter the console.</p>
         </div>
 
         <div className="access-crew-grid" role="group" aria-label="Expedition crew">
@@ -341,7 +341,7 @@ export default function DemoSignIn({
             <b>{person.demoPin}</b>
           </span>
           <button type="button" className="primary-button" onClick={openPage} disabled={checking}>
-            {checking ? "Authenticating…" : "Authenticate & Enter Console"}
+            {checking ? "Opening console…" : "Enter demo console"}
           </button>
         </div>
 
@@ -429,7 +429,7 @@ export default function DemoSignIn({
             </p>
           ) : (
             <p className="access-checking" aria-live="polite">
-              {checking ? "Authenticating credentials…" : ""}
+              {checking ? "Opening demo console…" : ""}
             </p>
           )}
         </div>

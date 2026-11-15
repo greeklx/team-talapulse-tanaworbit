@@ -53,7 +53,6 @@ import PumaTracker from "./PumaTracker";
 import TelemetryReportModal from "./TelemetryReportModal";
 import OnboardingModal, { type TourStep } from "./OnboardingModal";
 import SimulationScenarioModal from "./SimulationScenarioModal";
-import AcuteEmergencyProtocolModal from "./AcuteEmergencyProtocolModal";
 import LiveWaveformStream from "./LiveWaveformStream";
 import ZeroGLivingGuide from "./ZeroGLivingGuide";
 import DailyHealthCheckIn, { type CheckInDraft } from "./DailyHealthCheckIn";
@@ -62,7 +61,7 @@ import Term from "./Term";
 import { missionContexts, routineDefinitions, type MetricId, type ToolkitTab } from "./toolkitData";
 import { useRoutineReminders } from "./useRoutineReminders";
 import "./toolkit.css";
-const HealthToolkit = lazy(() => import("./HealthToolkit"));
+import HealthToolkit from "./HealthToolkit";
 const TanawGuide = lazy(() => import("./TanawGuide"));
 import {
   biodataFor,
@@ -544,73 +543,73 @@ const tourSteps: TourStep<Page>[] = [
     page: "Astronaut Dashboard",
     selector: "[data-tour='today-numbers']",
     tag: "TODAY",
-    title: "Today's numbers & vitals",
+    title: "Today's numbers",
     description:
-      "Heart rate, blood pressure, sleep duration, and perceived fatigue compared against your personal 14-day rolling mission average.",
+      "Heart rate, blood pressure, sleep, and how tired you feel, next to the average of the previous 14 days.",
   },
   {
     page: "Astronaut Dashboard",
     selector: "[data-tour='today-compare']",
     tag: "COMPARE",
-    title: "14-day baseline trends",
+    title: "Compared with recent days",
     description:
-      "Visual timeline and baseline deltas comparing current readings with recent mission days. Usual indicates expected range; Different marks readings warranting observation.",
+      "Today's numbers sit next to the previous 14 days. Usual, Different, and Flagged are the labels on this page.",
   },
   {
     page: "Astronaut Dashboard",
     selector: "[data-tour='somatic-avatar']",
-    tag: "ANATOMY",
-    title: "Interactive somatic body map",
+    tag: "BODY",
+    title: "A picture of the body",
     description:
-      "Contoured human anatomical silhouette with localized physiological indicators. Click head, chest, arms, or legs to review localized telemetry and cardiovascular load.",
+      "Choose head, chest, arms, or legs to read a short note. The picture does not take a measurement and it does not start a treatment.",
   },
   {
     page: "Astronaut Dashboard",
     selector: "[data-tour='puma-tracker']",
-    tag: "METABOLIC",
-    title: "PUMA metabolic monitor",
+    tag: "BREATH",
+    title: "Breathing gas example",
     description:
-      "Continuous telemetry from the Portable Unit for Metabolic Analysis tracking minute ventilation, VO2, and VCO2 rates to evaluate respiratory efficiency during orbital tasks.",
+      "One example breath, with oxygen and carbon dioxide. It is not this person's stored day, and it is not a device.",
   },
   {
     page: "Health Check-In",
     selector: "[data-tour='checkin-suite']",
     tag: "RECORD",
-    title: "Daily in-flight check-in",
+    title: "Daily Check-In",
     description:
-      "Record daily vitals with mobile- and keypad-optimized inputs. Entries remain in local browser memory and can be exported into telemetry dossiers.",
+      "Press Next. Save is on the review step. The check-in stays in this browser until you refresh.",
   },
   {
     page: "Sensorimotor & Reflex",
     selector: "[data-tour='cognition-suite']",
     tag: "PRACTICE",
-    title: "Cognition & reflex practice",
+    title: "Practice",
     description:
-      "Ten research practices based on NASA Appendix C task lists—including Motor praxis, Fractal 2-back, and PVT—alongside finger tapping and reaction tests.",
+      "Short cognition practices, plus a tapping test and a reaction-time test. Scores stay in this browser until you refresh.",
   },
   {
     page: "Exercise & Recovery",
     selector: "[data-tour='exercise-suite']",
     tag: "EXERCISE",
-    title: "Exercise tracking & recovery",
+    title: "Exercise",
     description:
-      "Log daily resistive workouts or cycle ergometer minutes, record perceived exertion (RPE 1-10), and view your 7-day movement trend next to recovery sleep.",
+      "Minutes already stored for this mission, and a place to write down one session. It stays in this browser until you refresh.",
   },
   {
     page: "Alerts & Attention",
     selector: "[data-tour='alerts-console']",
     tag: "FLAGS",
-    title: "Flags & triage attention",
+    title: "Flags",
     description:
-      "Readings differing from 14-day rolling averages and items flagged for clinical review. Usual, Different, and Flagged are operational console triage labels.",
+      "Readings that differ from the previous 14 days. This page compares numbers. A sudden or severe feeling belongs to the crew's own emergency steps.",
   },
   {
     page: "Health Guidance",
     selector: "[data-tour='zero-g-guide']",
     tag: "NOTES",
-    title: "Living notes & guidance",
+    title: "Living notes",
     description:
-      "Operational aerospace notes covering sleep, microgravity adaptation, and cabin air thresholds. Educational prototype for mission crews.",
+      "Notes about sleep, air, and living in a cabin. This is not medical advice and not a NASA manual.",
   },
 ];
 const topics = [
@@ -854,7 +853,7 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
   const [keptNotes, setKeptNotes] = useState<Record<string, string>>({});
   const [cognitionLog, setCognitionLog] = useState<Record<string, CognitionEntry[]>>({});
   const [topic, setTopic] = useState(0);
-  const [modal, setModal] = useState<"about" | "settings" | "export" | "onboarding" | "account" | "simulation" | "acute-emergency" | null>(null);
+  const [modal, setModal] = useState<"about" | "settings" | "export" | "onboarding" | "account" | "simulation" | null>(null);
   const [tourIndex, setTourIndex] = useState(0);
   const tourReady = useRef(false);
   const [narrow, setNarrow] = useState(() =>
@@ -1244,7 +1243,10 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
         unit: "hrs",
         base: `${baseline.sleep} hrs`,
         status: sleepObserve ? "Observe" : "Stable",
-        note: `${Math.abs(reading.sleep - baseline.sleep).toFixed(1)} hrs ${reading.sleep < baseline.sleep ? "below" : "above"} your average`,
+        note:
+          Math.abs(reading.sleep - baseline.sleep) < 0.05
+            ? "Matches your 14-day average"
+            : `${Math.abs(reading.sleep - baseline.sleep).toFixed(1)} hrs ${reading.sleep < baseline.sleep ? "below" : "above"} your average`,
         type: 2,
       },
       {
@@ -1312,7 +1314,7 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                 {reading.mood} <small>Self-reported</small>
               </strong>
             </div>
-            <span className="recorded-note">Self-reported status</span>
+            <span className="recorded-note">Self-reported</span>
           </div>
           <div>
             <span className="secondary-icon">
@@ -1329,7 +1331,7 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                 <small>°{units === "Celsius" ? "C" : "F"}</small>
               </strong>
             </div>
-            <span className="recorded-note">Core body telemetry</span>
+            <span className="recorded-note">Stored sample</span>
           </div>
           <div>
             <span className="secondary-icon">
@@ -1343,7 +1345,7 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                 {samples[selectedCrew].spo2} <small>% SpO₂</small>
               </strong>
             </div>
-            <span className="recorded-note">Pulse oximeter SpO₂</span>
+            <span className="recorded-note">Stored sample</span>
           </div>
           <div>
             <span className="secondary-icon">
@@ -1357,7 +1359,7 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                 {samples[selectedCrew].glucoseMgDl} <small>mg/dL</small>
               </strong>
             </div>
-            <span className="recorded-note">Fasting capillary glucose</span>
+            <span className="recorded-note">Stored sample</span>
           </div>
           <div>
             <span className="secondary-icon">
@@ -1371,7 +1373,7 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
                 {samples[selectedCrew].respiration} <small>breaths/min</small>
               </strong>
             </div>
-            <span className="recorded-note">Resting respiration rate</span>
+            <span className="recorded-note">Stored sample</span>
           </div>
         </div>
       </>
@@ -1795,14 +1797,23 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
             <div>
               <span>Difference</span>
               <strong className={sleepObserve ? "amber-text" : "green-text"}>
-                {reading.sleep < baseline.sleep ? "↓" : "↑"}{" "}
+                {Math.abs(reading.sleep - baseline.sleep) < 0.05
+                  ? "↔"
+                  : reading.sleep < baseline.sleep
+                    ? "↓"
+                    : "↑"}{" "}
                 {Math.abs(reading.sleep - baseline.sleep).toFixed(1)}
                 <small>hrs</small>
               </strong>
             </div>
           </div>
           <p>
-            Sleep is {reading.sleep < baseline.sleep ? "shorter" : "longer"} than your average
+            Sleep is{" "}
+            {Math.abs(reading.sleep - baseline.sleep) < 0.05
+              ? "the same as your average"
+              : reading.sleep < baseline.sleep
+                ? "shorter than your average"
+                : "longer than your average"}
             {fatigueObserve ? ", and you marked yourself more tired" : ""}.
           </p>
         </div>
@@ -2694,38 +2705,6 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
 
             {page === "Alerts & Attention" && (
               <div data-tour="alerts-console" className="space-y-6">
-                {/* Space Apps Challenge Emergency Crisis Protocol Banner */}
-                <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-300 dark:border-rose-500/50 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-xs">
-                  <div className="flex items-start gap-3">
-                    <span className="p-2 rounded-lg bg-rose-600 text-white shrink-0 mt-0.5">
-                      <Icon name="shield" size={18} />
-                    </span>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider">
-                          SPACE APPS CHALLENGE SCENARIO · BRAZILIAN SPACE AGENCY
-                        </span>
-                        <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-rose-200 dark:bg-rose-900/60 text-rose-800 dark:text-rose-300">
-                          NON-DOCTOR PROTOCOL
-                        </span>
-                      </div>
-                      <strong className="text-sm font-bold text-slate-900 dark:text-white block mt-0.5">
-                        Halfway to Mars · Acute Medical Crisis (Chest Pain &amp; Sudden Collapse)
-                      </strong>
-                      <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">
-                        Autonomous 4-phase clinical protocol for non-doctor astronauts: Zero-G CPR restraint, sensor placement, differential diagnosis, and Emergency DSN burst uplink.
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setModal("acute-emergency")}
-                    className="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-mono text-xs font-bold transition shrink-0 cursor-pointer shadow-sm active:scale-98"
-                  >
-                    Launch Emergency Drill →
-                  </button>
-                </div>
-
                 <div className="alert-status-grid">
                   {(["Stable", "Observe", "Attention"] as Status[]).map((s) => (
                     <button
@@ -2985,19 +2964,9 @@ function App({ crewId, allowCrewSwitch, portal, onSignOut }: ConsoleProps) {
               setModal(null);
             }}
             onClose={() => setModal(null)}
-            onLaunchEmergencyDrill={() => setModal("acute-emergency")}
           />
         )}
-        {modal === "acute-emergency" && (
-          <AcuteEmergencyProtocolModal
-            onClose={() => setModal(null)}
-            onNavigateToWaveforms={() => {
-              navigate("Sensorimotor & Reflex");
-              setModal(null);
-            }}
-          />
-        )}
-        {modal && modal !== "export" && modal !== "onboarding" && modal !== "simulation" && modal !== "acute-emergency" && (
+        {modal && modal !== "export" && modal !== "onboarding" && modal !== "simulation" && (
           <div className="modal-backdrop" onClick={() => setModal(null)}>
             <section
               className={modal === "account" ? "panel modal account-modal" : "panel modal"}

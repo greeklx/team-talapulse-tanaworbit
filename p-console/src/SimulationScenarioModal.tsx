@@ -69,13 +69,11 @@ export default function SimulationScenarioModal({
   onSelect,
   onNavigate,
   onClose,
-  onLaunchEmergencyDrill,
 }: {
   currentId: string;
   onSelect: (id: string) => void;
   onNavigate?: (page: Page) => void;
   onClose: () => void;
-  onLaunchEmergencyDrill?: () => void;
 }) {
   const [selectedId, setSelectedId] = useState<string>(currentId);
 
@@ -257,30 +255,6 @@ export default function SimulationScenarioModal({
                 </span>
               ))}
             </div>
-          </div>
-
-          {/* Halfway to Mars Emergency Crisis Callout */}
-          <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-            <div>
-              <span className="font-mono text-[10px] font-bold text-rose-600 dark:text-rose-400 uppercase tracking-wider block mb-0.5">
-                SPACE APPS CHALLENGE SCENARIO (BRAZILIAN SPACE AGENCY)
-              </span>
-              <strong className="text-slate-900 dark:text-white font-semibold block">
-                Halfway to Mars · Acute Medical Crisis (Chest Pain &amp; Sudden Collapse)
-              </strong>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
-                Astronaut collapses with severe chest pain 14 light-minutes from Earth. Astronauts are not doctors. Run autonomous life-safety and non-doctor triage.
-              </p>
-            </div>
-            {onLaunchEmergencyDrill && (
-              <button
-                type="button"
-                onClick={onLaunchEmergencyDrill}
-                className="px-3.5 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-mono text-xs font-bold transition shrink-0 cursor-pointer shadow-sm active:scale-98"
-              >
-                Launch Crisis Drill →
-              </button>
-            )}
           </div>
 
           {/* Newbie Tip */}

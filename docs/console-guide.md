@@ -4,7 +4,7 @@
 
 ## Enter the demo
 
-1. Choose one of the five fictional crew profiles on the entry screen: Ella Nicole Fabro, Abrey Diane Barcellano, Hannah Faith Lopez, Gary Kenp Marasigan, or Greek William Legaspi.
+1. Choose one of the five fictional crew profiles on the entry screen: Ella Nicole Fabro, Abrey Diane Barcellano, Hannah Faith Lopez, Gary Ken Marasigan, or Greek William Legaspi.
 2. Enter the selected profile's displayed four-digit sample PIN, or select **Fill demo PIN**.
 3. The console opens automatically when the four digits match. A mismatch displays an error and clears the input.
 

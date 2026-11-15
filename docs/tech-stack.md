@@ -53,6 +53,9 @@ Editable source: [diagrams/tech-stack.mmd](diagrams/tech-stack.mmd).
 | ---------------------- | ------------------------- | --------------------------- | --------------------------------------------------------------------------- |
 | React                  | `^19.0.0`                 | `19.2.4`                    | UI components, state, effects, and conditional views.                       |
 | React DOM              | `^19.0.0`                 | `19.2.4`                    | Mounts and renders the application in the browser.                          |
+| React Router DOM       | `^7.18.5`                 | `7.18.5`                    | Client-side routing between `/`, `/a-login`, `/b-login`, `/admin`, `/tester`, and `/Astronaut`. |
+| Recharts               | `3.8.0`                   | `3.8.0`                     | Composite charting components for specialized trends.                        |
+| Lucide React           | `^0.577.0`                | `0.577.0`                   | Comprehensive vector iconography suite.                                      |
 | TypeScript             | `^5.7.0`                  | `5.9.3`                     | Type-checks TS/TSX. A compiler version is not a browser runtime dependency. |
 | Vite                   | `^8.0.5`                  | `8.0.5`                     | Development/build tooling and static asset bundling.                        |
 | Tailwind CSS           | `^4.0.0`                  | `4.2.2`                     | Utility styling with additional custom CSS.                                 |
@@ -66,15 +69,15 @@ React and Node type-definition packages are development dependencies. `pnpm-lock
 
 ## Browser-native functionality
 
-- **State and navigation:** `useState` and conditional rendering. No React Router or URL-based screen routing is installed.
+- **State and navigation:** `react-router-dom` (v7) handles screen routing (`/`, `/a-login`, `/b-login`, `/admin`, `/tester`, `/Astronaut`), paired with React `useState` for in-memory view switching and interactive modalities across 16 console views.
 - **Effects and accessibility:** `useEffect`, DOM focus handling, Escape dismissal, focus-visible styles, and reduced-motion CSS.
-- **Charts:** Handwritten SVG polylines, circles, gradients, grid lines, and hover targets. No Recharts, Chart.js, D3, or other chart package is installed.
+- **Charts:** Handwritten SVG polylines, sparklines, circles, gradients, and hover targets combined with `recharts` for specialized telemetry visualisations.
 - **Forms:** Native number inputs, required/min/max/step constraints, buttons for fatigue and mood, and an optional notes field. Browser input constraints do not equal clinical validation.
 - **Downloads:** `Blob`, `URL.createObjectURL`, an anchor download, and `URL.revokeObjectURL` produce a local CSV.
-- **Touch console and demo entry:** `matchMedia`, responsive CSS, browser Fullscreen API, and a public-PIN profile-selection screen. The privacy shield is removed. No real authentication or persistent storage is implemented.
-- **Data:** static JSON imports through `p-console/src/data.ts`, plus React-memory latest-reading overrides and exercise additions. Run `pnpm test:data` to validate fixtures.
-- **Assets:** Local JPEG photographs; SVG/PNG TanawOrbit branding; WOFF2 DM Sans and IBM Plex Mono fonts.
-- **Guidance:** Static copy and external NASA links. No NASA API calls or medical-content service is used.
+- **Touch console and demo entry:** `matchMedia`, responsive CSS, browser Fullscreen API, and an astronaut demo-entry screen with designated public PINs and crew photos. No real authentication or persistent storage is implemented.
+- **Data:** Static JSON imports through `p-console/src/data.ts`, with 150 health records across 5 crew members, plus React-memory latest-reading overrides and temporary exercise additions. Run `pnpm test:data` to validate fixtures.
+- **Assets:** Local JPEG crew photographs and mission imagery; SVG/PNG TanawOrbit branding; WOFF2 DM Sans and IBM Plex Mono fonts.
+- **Guidance & walkthroughs:** Stored educational notes, interactive anatomical adaptation reference, and 12 curated Tanaw Guide answers. No NASA API calls or medical-content service is used.
 
 ## Design and documentation tools
 

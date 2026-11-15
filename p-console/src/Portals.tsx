@@ -177,7 +177,6 @@ function leave(login: "/a-login" | "/b-login", navigate: (path: string) => void)
 export function AstronautPortal() {
   const session = useSession();
   const navigate = useNavigate();
-  if (session && session.kind === "backend" && session.role !== "admin") return <Navigate to="/b-login" replace />;
   const params = new URLSearchParams(window.location.search);
   const requested = params.get("crew");
   const savedCrew = typeof localStorage !== "undefined" ? localStorage.getItem("tanaworbit_crew_id") : null;
@@ -196,6 +195,10 @@ export function AstronautPortal() {
       writeSession({ kind: "astronaut", crewId: effectiveCrewId });
     }
   }, [session, effectiveCrewId]);
+
+  if (session && session.kind === "backend" && session.role !== "admin") {
+    return <Navigate to="/b-login" replace />;
+  }
 
   return (
     <App
@@ -272,7 +275,7 @@ export function AdminPortal() {
               <span className="portal-kicker">{person.role}</span>
               <strong>{person.name}</strong>
               <p>
-                <b className={status === "Stable" ? "pass" : "fail"}>{status}</b>
+                <b className={status === "Stable" ? "pass" : "fail"}>{statusWord[status]}</b>
                 {" · "}
                 {note}
               </p>

@@ -14,7 +14,7 @@ const METRIC_INSIGHTS = {
     title: "Heart rate",
     layman: "How fast your heart is beating",
     unit: "bpm",
-    normal: "60 â€“ 100 bpm (Resting)",
+    normal: "60 – 100 bpm (Resting)",
     whatItMeans:
       "Measures the electrical pacing of your cardiac cycle (P-wave atrial contraction, QRS ventricular pump, and T-wave repolarization).",
     spaceSignificance:
@@ -24,7 +24,7 @@ const METRIC_INSIGHTS = {
     title: "Blood oxygen",
     layman: "How much oxygen your blood is carrying",
     unit: "%",
-    normal: "Often near 95â€“100% at rest",
+    normal: "Often near 95–100% at rest",
     whatItMeans:
       "The percentage of hemoglobin proteins in your red blood cells currently carrying oxygen molecules to your brain and vital organs.",
     spaceSignificance:
@@ -34,11 +34,11 @@ const METRIC_INSIGHTS = {
     title: "Breathing",
     layman: "How many breaths you take in a minute",
     unit: "breaths/min",
-    normal: "12 â€“ 20 breaths/min (Resting)",
+    normal: "12 – 20 breaths/min (Resting)",
     whatItMeans:
       "The number of complete inhalation and exhalation breath cycles per minute.",
     spaceSignificance:
-      "Exhaled COâ‚‚ has no buoyancy in zero-G; without gravity it doesn't rise. If you are working in an unventilated spacecraft corner, your own exhaled COâ‚‚ pools in front of your mouth, triggering rapid breathing, headache, and flushing.",
+      "Exhaled CO₂ has no buoyancy in zero-G; without gravity it doesn't rise. If you are working in an unventilated spacecraft corner, your own exhaled CO₂ pools in front of your mouth, triggering rapid breathing, headache, and flushing.",
   },
 };
 
@@ -261,7 +261,7 @@ export default function LiveWaveformStream({
               <strong className="text-lg font-bold text-cyan-600 dark:text-cyan-300 tabular-nums">
                 {spo2}
               </strong>
-              <small className="text-xs text-slate-500 dark:text-slate-400">% SpOâ‚‚</small>
+              <small className="text-xs text-slate-500 dark:text-slate-400">% SpO₂</small>
             </div>
           </div>
 

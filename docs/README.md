@@ -66,7 +66,7 @@ Open a source file in a Mermaid-compatible editor to render or export it. Mermai
 - The application runs in a browser using React, TypeScript, Vite, and Tailwind CSS.
 - Check-ins use a Record → Review → Complete workflow and replace the selected crew member's latest reading in React memory. Per-crew drafts survive navigation, but refreshing the page resets the demo.
 - Example baselines are computed separately per crew from the previous 14 synthetic JSON days. They are not medically validated or learned models.
-- Earlier chart points come from 120 synthetic JSON health records. Physiological waveform shapes remain illustrative; no sensor history is connected.
+- Earlier chart points come from 150 synthetic JSON health records (5 crew × 30 days). Physiological waveform shapes remain illustrative; no sensor history is connected.
 - Status rules are simple demonstration rules, not validated medical thresholds.
 - Mission-context previews change explanations only. The body overview is a schematic, not a scan.
 - Routine reminders work only within the open page; no background delivery is guaranteed.

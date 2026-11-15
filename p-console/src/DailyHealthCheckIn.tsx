@@ -99,7 +99,7 @@ export default function DailyHealthCheckIn({
   const diaDelta = Math.round(diaVal - baseline.diastolic);
   const sleepDelta = +(sleepVal - baseline.sleep).toFixed(1);
 
-  // Automated Flight Surgeon Clinical Triggers
+  // Form notes and demonstration reference indicators
   const clinicalAdvisories = useMemo(() => {
     const list: { type: "nominal" | "warning" | "alert"; text: string; action: string }[] = [];
 
@@ -156,8 +156,8 @@ export default function DailyHealthCheckIn({
     return list;
   }, [sansVisualBlur, cephaladShift, sleepVal, sleepDelta, hrVal, hrDelta, sysVal, diaVal, coreTemp]);
 
-  // 1-Click Sync from Wearable Telemetry (PUMA / Bio-Harness)
-  function syncWearableSensors() {
+  // Fill sample reading for demonstration
+  function fillSampleReading() {
     onDraftChange({
       ...draft,
       heart: baseline.heart,
@@ -385,7 +385,7 @@ Your note: ${draft.notes || "None."}`;
         <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={syncWearableSensors}
+            onClick={fillSampleReading}
             className="secondary-button"
             title="Fill the form with a sample. This does not read a wearable."
           >

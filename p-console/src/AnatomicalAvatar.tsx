@@ -47,7 +47,7 @@ const ZONE_DATA: Record<
   head: {
     title: "Cranial & Ocular System",
     laymanLabel: "Head, Eyes & Brain",
-    telemetryBadge: "SANS: Nominal · Cabin CO₂: 3.2 mmHg · ICP: Stable",
+    telemetryBadge: "Demonstration reference: SANS nominal · CO₂: 3.2 mmHg",
     spacePhenomenon:
       "Fluid Shift & SANS: Without gravity, ~2 liters of bodily fluids float up into your upper body and head, causing facial puffiness, sinus fullness, and mild optic nerve flattening (Spaceflight Associated Neuro-ocular Syndrome).",
     symptoms: [
@@ -57,14 +57,14 @@ const ZONE_DATA: Record<
       "Puffiness around eyelids",
     ],
     countermeasure:
-      "Perform a 15-minute Lower Body Negative Pressure (LBNP) session to draw fluids down; verify cabin air scrubber is keeping CO₂ < 5.3 mmHg; stay in the path of the cabin ventilation stream.",
+      "A full feeling in the head is a reason to look at today's check-in and the Cabin air page. This picture does not start a pressure session.",
     normalBaseline: "Clear optical vision, normal intracranial pressure, normal alertness.",
     status: "Nominal",
   },
   neck: {
     title: "Cervical & Vestibular System",
     laymanLabel: "Neck & Inner Ear (Balance)",
-    telemetryBadge: "Otolith Adaptation: Nominal · Gaze Tracking: 100%",
+    telemetryBadge: "Demonstration reference: Otolith adaptation nominal",
     spacePhenomenon:
       "Otolith Disorientation: Gravity sensors in your inner ear no longer detect 'down'. Rapid head turns cause illusions like feeling inverted or spinning while floating.",
     symptoms: [
@@ -73,14 +73,14 @@ const ZONE_DATA: Record<
       "Neck paraspinal muscle tension from awkward tethering",
     ],
     countermeasure:
-      "Keep head movements slow and aligned with your body axis during the first 3 days; look at clear visual references (cabin deck/ceiling labels); perform gentle neck isometric stretches.",
+      "Quick head turns can feel like spinning while floating. This picture does not assign a stretch.",
     normalBaseline: "Normal balance adaptation, stable gaze tracking during movement.",
     status: "Nominal",
   },
   chest: {
     title: "Thoracic & Cardiovascular",
     laymanLabel: "Heart, Lungs & Breath",
-    telemetryBadge: "Resting HR: 71 bpm · SpO₂: 97% · PUMA: 15 br/min",
+    telemetryBadge: "Demonstration reference: Resting HR: 71 bpm · SpO₂: 97%",
     spacePhenomenon:
       "Cardiovascular Deconditioning: Your heart doesn't have to pump against gravity, so it works less, stroke volume shifts, and resting pulse fluctuates during intense exercise.",
     symptoms: [
@@ -90,16 +90,16 @@ const ZONE_DATA: Record<
       "Sensations of heart fluttering (palpitations)",
     ],
     countermeasure:
-      "Rest at your tethered station; put on pulse oximeter and check SpO₂ (target >96%); breathe slowly and monitor PUMA lung gas exchange; alert Medical Officer if chest discomfort persists.",
+      "Heart rate, blood oxygen, and breathing on this page come from the stored day or from a saved check-in. The breathing-gas card is an example of one breath. A sudden or severe feeling belongs to the crew's own emergency steps.",
     normalBaseline: "Resting pulse 60-80 bpm, blood pressure 110-120/70-80 mmHg, SpO₂ 97-99%.",
     status: "Nominal",
   },
   abdomen: {
     title: "Gastrointestinal & Digestive",
     laymanLabel: "Stomach & Digestion",
-    telemetryBadge: "Gastric Motility: Active · SMS Index: 0 (None)",
+    telemetryBadge: "Demonstration reference: Motility active · SMS index 0",
     spacePhenomenon:
-      "Space Motion Sickness (SMS): Disorientation between your inner ear and eyes causes stomach awareness, reduced appetite, and slow gastric emptying in 70% of astronauts in the first 72 hours.",
+      "Space Motion Sickness (SMS): Disorientation between your inner ear and eyes causes stomach awareness, reduced appetite, and slow gastric emptying, common during initial microgravity adaptation.",
     symptoms: [
       "Stomach awareness / mild queasiness",
       "Loss of appetite despite low calories",
@@ -107,30 +107,30 @@ const ZONE_DATA: Record<
       "Sudden nausea triggered by floating head-over-heels",
     ],
     countermeasure:
-      "Sip electrolyte water slowly; choose bland, easy-to-digest NASA meal pouches (e.g. oatmeal, rice); take prescribed motion sickness countermeasure (oral Promethazine) if nausea prevents drinking.",
+      "Queasiness is common in the first days of floating. Meals for this day are on Nutrition. This picture does not suggest a medicine.",
     normalBaseline: "Normal appetite, smooth digestion, meeting 2,400 kcal/day nutritional target.",
     status: "Nominal",
   },
   spine: {
     title: "Vertebral Column & Posture",
     laymanLabel: "Spine & Lower Back",
-    telemetryBadge: "Elongation: +4.2 cm · Lumbar Strain: Mild (Expected)",
+    telemetryBadge: "Demonstration reference: Elongation +4.2 cm (expected 3–5 cm)",
     spacePhenomenon:
-      "Spinal Elongation: Intervertebral discs absorb fluid and expand without gravitational load. Astronauts grow 2 to 3 inches taller in space, which stretches back ligaments and causes a dull lower back ache.",
+      "Spinal Elongation: Intervertebral discs absorb fluid and expand without gravitational load. Astronauts may lengthen +3 to 5 cm (+4.2 cm typical), stretching spinal ligaments and causing a dull lower back ache.",
     symptoms: [
       "Dull lower back ache (morning or after waking)",
-      "Height increase feeling (4-6 cm elongation)",
+      "Height increase sensation (+4.2 cm typical elongation)",
       "Core muscle fatigue from floating in Neutral Body Posture",
     ],
     countermeasure:
-      "Perform the NASA 'fetal tuck' stretch: pull knees tightly to chest while tethered for 5-10 minutes twice daily; ensure ARED resistive workout harness has snug lumbar support.",
+      "The back can ache when the spine lengthens a few centimeters. Exercise and sleep notes are on their own pages. This picture does not assign a stretch.",
     normalBaseline: "Spine lengthened comfortably within expected 3-5 cm range, zero sharp pain.",
     status: "Nominal",
   },
   upperLimbs: {
     title: "Upper Extremities & Motor Control",
     laymanLabel: "Arms, Wrists & Hands",
-    telemetryBadge: "Handgrip: 48 kg · Fine Motor Praxis: 98.4%",
+    telemetryBadge: "Demonstration reference: Handgrip: 48 kg · Motor praxis: 98%",
     spacePhenomenon:
       "Handgrip Fatigue & Tether Strain: Because you don't walk, you navigate the space station entirely by pulling and gripping handrails, leading to forearm flexor strain and tired finger joints.",
     symptoms: [
@@ -139,14 +139,14 @@ const ZONE_DATA: Record<
       "Slight tremor during fine motor screen tapping",
     ],
     countermeasure:
-      "Gently stretch forearms and flex/extend wrists; apply a warm thermal pad from the crew care pack; run the built-in 15-second Motor Skills test to benchmark finger dexterity.",
+      "Hands do more of the moving, by gripping rails. Practice on this console has a short tapping test. This picture does not measure grip.",
     normalBaseline: "Full handgrip strength, flexible wrists, rapid finger motor accuracy.",
     status: "Nominal",
   },
   lowerLimbs: {
     title: "Lower Extremities & Bones",
     laymanLabel: "Hips, Legs & Calves",
-    telemetryBadge: "Calf Fluid Shift: -1.2 cm · ARED Deadlift: Logged",
+    telemetryBadge: "Demonstration reference: Calf change -1.2 cm",
     spacePhenomenon:
       "Muscle & Bone Unloading ('Bird Legs'): Because your legs do zero work to support body weight in microgravity, leg fluids travel upward and calf muscles atrophy rapidly if not exercised.",
     symptoms: [
@@ -155,7 +155,7 @@ const ZONE_DATA: Record<
       "Shin or knee tenderness from treadmill bungee load harness",
     ],
     countermeasure:
-      "Complete the mandatory daily 2-hour workout: 1 hour heavy ARED resistive squats + deadlifts, followed by 30-45 minutes on the T2 treadmill with bungee harness loaded to 1G bodyweight equivalent.",
+      "Legs do less work when they are not standing. Exercise minutes are logged on the Exercise page. This picture does not assign a workout.",
     normalBaseline: "Calf circumference stable, strong pedal pulses, zero swelling or edema.",
     status: "Nominal",
   },
@@ -228,11 +228,13 @@ export default function AnatomicalAvatar({
         <div>
           <h3 className="text-lg font-semibold">Body notes</h3>
           <p className="text-sm text-[var(--muted)]">
-            Pick a region to read a stored note. These notes are not a medical check.
+            Pick a region to read stored physiological adaptation notes. For educational exploration only — not medical guidance.
           </p>
         </div>
 
-        <p className="text-xs text-[var(--muted)]">Stored notes. Not a live check.</p>
+        <div className="text-xs font-mono text-[var(--muted)] bg-sky-50 dark:bg-slate-900 px-2.5 py-1 rounded border border-sky-200 dark:border-slate-800">
+          Stored notes · Not medical advice
+        </div>
       </div>
 
       {/* Main Grid: Anatomical Wireframe (Left) + Layman Action Protocol (Right) */}

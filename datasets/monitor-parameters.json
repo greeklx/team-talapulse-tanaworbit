@@ -128,7 +128,7 @@
       "warningMax": 100,
       "criticalMin": 1,
       "criticalMax": 100,
-      "comparison": "Below 95% requires attention; below 89% is critical",
+      "comparison": "Demonstration bounds: below 95% is outside usual range; below 89% is outside demonstration range",
       "demoMin": 1,
       "demoMax": 100
     },

@@ -55,7 +55,7 @@
       "type": "Synthetic data and deterministic demonstration logic",
       "origin": "SI-assisted fictional examples; not NASA medical data",
       "baselines": "Per-crew arithmetic means of the previous 14 synthetic JSON mission days, excluding the current day",
-      "history": "120 static synthetic health records; current-day readings may be overridden in memory",
+      "history": "150 static synthetic health records; current-day readings may be overridden in memory",
       "attention_status": "Scripted reviewRequested flag in crew.json"
     },
     {
@@ -165,9 +165,9 @@
     "drafts": "Per-crew React memory; cleared on refresh",
     "demo_pin_access": "Public fictional PINs compared in the frontend; not authentication, authorization, or medical-data protection",
     "fixture_counts": {
-      "crew": 4,
-      "health_records": 120,
-      "exercise_records": 20
+      "crew": 5,
+      "health_records": 150,
+      "exercise_records": 25
     },
     "scripted_guide": "Fixed topic/keyword answers and narrow template insertion; not a live AI, emergency triage, medication adviser, or comprehensive safety classifier",
     "routine_reminders": "In-page timeouts only; no reliable background delivery or medical schedule",

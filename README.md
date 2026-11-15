@@ -32,11 +32,11 @@ TanawOrbit combines a Filipino word with an English spaceflight term.
 | `docs` | Challenge documentation, resource credits, and provenance. |
 | `scripts` | Fixture integrity checks. They do not prove clinical validity. |
 
-The console does not call the Worker. A check-in still resets when the page refreshes. The Worker does not store health records.
+The astronaut console operates client-side with bundled JSON fixtures. `/tester` calls the read-only Worker to verify fixture integrity and 14-day baseline calculations. The Worker does not store health records or credentials.
 
 ## Run it
 
-Node.js 22 and pnpm 10.
+Node.js 22 and pnpm (e.g. `pnpm@11.20.0`).
 
 ```sh
 pnpm install

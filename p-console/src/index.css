@@ -470,7 +470,7 @@
 }
 main {
   max-width: 1680px;
-  padding: 29px 30px 0;
+  padding: 29px 30px 88px;
   margin: 0 auto;
 }
 .page-heading {
@@ -6538,7 +6538,8 @@ textarea::placeholder {
 
 .touch-mode .tanaw-guide-launcher {
   bottom: 96px;
-  right: 18px;
+  left: 18px;
+  right: auto;
   padding: 8px 14px;
   border-radius: 9999px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);

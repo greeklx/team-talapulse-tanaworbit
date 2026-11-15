@@ -84,8 +84,14 @@ export default function AcuteEmergencyProtocolModal({
           </h1>
 
           <p className="text-xs sm:text-sm text-[var(--muted)] mt-1.5 leading-relaxed max-w-3xl">
-            <strong>Space Apps Challenge Scenario (Brazilian Space Agency / Rodrigo Leonardi):</strong> You are halfway to Mars when a fellow astronaut experiences acute crushing substernal chest pain and suddenly collapses. Astronauts are cross-trained engineers, pilots, and scientists—<strong>not medical doctors</strong>. Follow this 4-phase clinical stabilization protocol.
+            <strong>Space Apps Challenge Scenario (Brazilian Space Agency / Rodrigo Leonardi):</strong> You are halfway to Mars when a fellow astronaut experiences acute crushing substernal chest pain and suddenly collapses. Astronauts are cross-trained engineers, pilots, and scientists—<strong>not medical doctors</strong>. Follow this 4-phase simulated training walkthrough.
           </p>
+        </div>
+
+        {/* Persistent Simulated Scenario Disclaimer */}
+        <div className="mb-4 p-2.5 rounded-lg bg-amber-500/15 border border-amber-500/40 text-amber-900 dark:text-amber-200 text-xs font-mono flex items-center gap-2">
+          <AlertTriangle size={15} className="text-amber-600 dark:text-amber-400 shrink-0" />
+          <span>SIMULATED TRAINING SCENARIO: Fictional demonstration doses and algorithm for educational walkthrough only — not medical guidance.</span>
         </div>
 
         {/* Phase Navigation Tabs */}
@@ -93,7 +99,7 @@ export default function AcuteEmergencyProtocolModal({
           {[
             { phase: 1, title: "1. Zero-G CPR Restraint", icon: HeartPulse },
             { phase: 2, title: "2. Sensor Deployment", icon: Activity },
-            { phase: 3, title: "3. Non-Doctor Triage", icon: Stethoscope },
+            { phase: 3, title: "3. Decision Tree", icon: Stethoscope },
             { phase: 4, title: "4. Rx & Telemetry Burst", icon: Send },
           ].map((item) => {
             const isActive = activePhase === item.phase;
@@ -255,7 +261,7 @@ export default function AcuteEmergencyProtocolModal({
                   onClick={() => markPhaseComplete(2)}
                   className="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-mono text-xs font-bold flex items-center gap-2 transition cursor-pointer shadow-md"
                 >
-                  <span>Confirm Sensors &amp; Proceed to Differential Triage</span>
+                  <span>Confirm Sensors &amp; Proceed to Decision Tree</span>
                   <ChevronRight size={15} />
                 </button>
               </div>
@@ -268,7 +274,7 @@ export default function AcuteEmergencyProtocolModal({
               <div className="flex items-center justify-between border-b border-[var(--border)] pb-3">
                 <div className="flex items-center gap-2.5">
                   <span className="p-2 rounded-lg bg-amber-500/20 text-amber-500 font-bold font-mono text-xs">PHASE 3</span>
-                  <h2 className="text-base font-bold text-[var(--text)]">Autonomous Differential Diagnosis: Non-Doctor Guide</h2>
+                  <h2 className="text-base font-bold text-[var(--text)]">Autonomous Decision Tree: Simulated Walkthrough</h2>
                 </div>
                 <span className="text-xs font-mono text-amber-500 font-medium">Algorithmic Decision Tree</span>
               </div>
@@ -291,7 +297,7 @@ export default function AcuteEmergencyProtocolModal({
                     <li>SpO2 may be &gt; 92% initially; BP fluctuating</li>
                   </ul>
                   <div className="pt-2 border-t border-[var(--border)] font-mono text-[11px] text-rose-600 dark:text-rose-400 font-semibold">
-                    Action: Aspirin 325 mg chewable + Nitroglycerin 0.4 mg SL (if SBP &gt; 100)
+                    Simulated Scenario Action: Follow protocol Aspirin / Nitroglycerin under surgeon review
                   </div>
                 </div>
 
@@ -371,15 +377,15 @@ export default function AcuteEmergencyProtocolModal({
                   <div className="space-y-2 text-[var(--muted)] leading-relaxed">
                     <div className="flex items-center gap-2">
                       <span className="size-4 rounded-full bg-emerald-500/20 text-emerald-500 grid place-items-center font-bold text-[10px]">✓</span>
-                      <span>Administer High-Flow Oxygen via Non-Rebreather Mask (15 L/min).</span>
+                      <span>High-Flow Oxygen via Non-Rebreather Mask (scenario demonstration).</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="size-4 rounded-full bg-emerald-500/20 text-emerald-500 grid place-items-center font-bold text-[10px]">✓</span>
-                      <span>Administer 325 mg Chewable Aspirin from EMK Drawer 2.</span>
+                      <span>Simulated EMK Chewable Aspirin (demonstration protocol).</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="size-4 rounded-full bg-emerald-500/20 text-emerald-500 grid place-items-center font-bold text-[10px]">✓</span>
-                      <span>Sublingual Nitroglycerin (0.4 mg) — verify SBP &gt; 100 mmHg.</span>
+                      <span>Simulated EMK Sublingual Nitroglycerin (demonstration protocol, if SBP &gt; 100 mmHg).</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="size-4 rounded-full bg-emerald-500/20 text-emerald-500 grid place-items-center font-bold text-[10px]">✓</span>

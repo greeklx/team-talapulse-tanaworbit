@@ -1267,7 +1267,8 @@ body .app-shell.touch-mode main {
 /* Fixed educational guide, not a live-model chat or medical service. */
 .tanaw-guide-launcher {
   position: fixed;
-  right: 26px;
+  left: calc(232px + 26px);
+  right: auto;
   bottom: 24px;
   z-index: 65;
   min-height: 56px;
@@ -1291,6 +1292,11 @@ body .app-shell.touch-mode main {
 }
 .tanaw-guide-launcher.above-dock {
   bottom: 112px;
+}
+@media (min-width: 1500px) {
+  .tanaw-guide-launcher {
+    left: calc(250px + 26px);
+  }
 }
 .tanaw-guide-launcher > span {
   font-size: 13px;
@@ -2196,7 +2202,8 @@ body .app-shell.touch-mode main {
     font-size: 10px;
   }
   .tanaw-guide-launcher {
-    right: 15px;
+    left: 15px;
+    right: auto;
     padding: 11px 14px;
     gap: 9px;
   }

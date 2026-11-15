@@ -351,6 +351,14 @@ This is an educational note. It is not medical advice.`;
 
   return (
     <div className="zero-g-living-guide space-y-6 animate-fade-in">
+      {/* Persistent Educational Disclaimer Banner */}
+      <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs flex items-center gap-2.5">
+        <AlertTriangle size={16} className="text-amber-600 dark:text-amber-400 shrink-0" />
+        <p className="leading-snug">
+          <strong>Educational notes:</strong> Stored reference material for mission simulation. Not medical advice and not a NASA manual.
+        </p>
+      </div>
+
       {/* Flight Operations Toolbar & Quick Actions */}
       <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-2">
@@ -359,7 +367,7 @@ This is an educational note. It is not medical advice.`;
             Notes for this cabin
           </span>
           <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-slate-600 dark:text-slate-300 font-mono text-xs">
-            Day 142 · Mission altitude 408 km
+            Day 142 · Mission altitude 406 km
           </span>
           <span className="px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-600/40 text-emerald-700 dark:text-emerald-300 font-mono text-xs font-semibold">
             {PROTOCOL_TOPICS.length} notes

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import type { CrewMember, Reading } from "./data";
-import { biodataFor, cabinConditions, mission } from "./data";
+import { biodataFor, cabinConditions, mission, observationFlags, rules } from "./data";
 
 export default function TelemetryReportModal({
   crewMember,
@@ -17,6 +17,26 @@ export default function TelemetryReportModal({
 }) {
   const bio = biodataFor(crewMember.id);
   const latestCabin = cabinConditions[cabinConditions.length - 1];
+  const flags = observationFlags(reading, baseline);
+
+  function getStatus(isFlagged: boolean) {
+    if (!isFlagged) {
+      return {
+        label: "USUAL",
+        cls: "bg-emerald-500/15 border-emerald-500/30 text-emerald-700 dark:text-emerald-400",
+      };
+    }
+    if (crewMember.reviewRequested) {
+      return {
+        label: "FLAGGED",
+        cls: "bg-rose-500/15 border-rose-500/30 text-rose-700 dark:text-rose-400 font-bold",
+      };
+    }
+    return {
+      label: "DIFFERENT",
+      cls: "bg-amber-500/15 border-amber-500/30 text-amber-700 dark:text-amber-400 font-bold",
+    };
+  }
 
   // Keyboard shortcut listener: Escape closes modal
   useEffect(() => {
@@ -57,7 +77,7 @@ export default function TelemetryReportModal({
             <span className="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse" />
             <div className="flex flex-col">
               <span className="text-xs font-mono font-bold tracking-wider uppercase text-sky-600 dark:text-sky-400">
-                Aerospace Medical Dossier · Official Telemetry Report
+                Synthetic Telemetry Dossier · Example Report
               </span>
               <span className="text-[11px] text-[var(--muted)] font-mono">
                 FD {mission.day} · {crewMember.name} ({crewMember.id.toUpperCase()})
@@ -163,7 +183,7 @@ export default function TelemetryReportModal({
           <section className="mb-6">
             <div className="report-section-heading">
               <h2>2. Cardiovascular &amp; Physiological Telemetry</h2>
-              <span className="text-[10px] font-mono text-[var(--subtle)]">STANDARDS: NASA STD-3001 VOL 1</span>
+              <span className="text-[10px] font-mono text-[var(--subtle)]">DEMONSTRATION RANGES · FOR EDUCATIONAL REVIEW</span>
             </div>
             <div className="report-table-wrapper">
               <table className="report-table">
@@ -183,15 +203,20 @@ export default function TelemetryReportModal({
                     <td className="text-center text-[var(--muted)]">{baseline.heart} bpm</td>
                     <td className="text-center text-sky-600 dark:text-sky-300 font-bold">{reading.heart} bpm</td>
                     <td className="text-center text-[var(--muted)]">
-                      <span className={Math.abs(hrDelta) > 10 ? "text-amber-600 dark:text-amber-400 font-bold" : ""}>
+                      <span className={Math.abs(hrDelta) > rules.heartDifferenceBpm ? "text-amber-600 dark:text-amber-400 font-bold" : ""}>
                         {hrDelta >= 0 ? `+${hrDelta}` : hrDelta} bpm
                       </span>
                     </td>
                     <td className="text-center text-[var(--subtle)]">60–100 bpm</td>
                     <td className="text-right">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400">
-                        NOMINAL
-                      </span>
+                      {(() => {
+                        const s = getStatus(flags.heart);
+                        return (
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${s.cls}`}>
+                            {s.label}
+                          </span>
+                        );
+                      })()}
                     </td>
                   </tr>
                   <tr>
@@ -203,9 +228,14 @@ export default function TelemetryReportModal({
                     </td>
                     <td className="text-center text-[var(--subtle)]">90–120 mmHg</td>
                     <td className="text-right">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400">
-                        NOMINAL
-                      </span>
+                      {(() => {
+                        const s = getStatus(Math.abs(sysDelta) > rules.pressureDifferenceMmHg);
+                        return (
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${s.cls}`}>
+                            {s.label}
+                          </span>
+                        );
+                      })()}
                     </td>
                   </tr>
                   <tr>
@@ -217,9 +247,14 @@ export default function TelemetryReportModal({
                     </td>
                     <td className="text-center text-[var(--subtle)]">60–80 mmHg</td>
                     <td className="text-right">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400">
-                        NOMINAL
-                      </span>
+                      {(() => {
+                        const s = getStatus(Math.abs(diaDelta) > rules.pressureDifferenceMmHg);
+                        return (
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${s.cls}`}>
+                            {s.label}
+                          </span>
+                        );
+                      })()}
                     </td>
                   </tr>
                   <tr>
@@ -231,9 +266,14 @@ export default function TelemetryReportModal({
                     </td>
                     <td className="text-center text-[var(--subtle)]">70–105 mmHg</td>
                     <td className="text-right">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400">
-                        NOMINAL
-                      </span>
+                      {(() => {
+                        const s = getStatus(Math.abs(mapDelta) > 10);
+                        return (
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${s.cls}`}>
+                            {s.label}
+                          </span>
+                        );
+                      })()}
                     </td>
                   </tr>
                   <tr>
@@ -245,9 +285,14 @@ export default function TelemetryReportModal({
                     </td>
                     <td className="text-center text-[var(--subtle)]">7.0–9.0 hrs</td>
                     <td className="text-right">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400">
-                        NOMINAL
-                      </span>
+                      {(() => {
+                        const s = getStatus(flags.sleep);
+                        return (
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${s.cls}`}>
+                            {s.label}
+                          </span>
+                        );
+                      })()}
                     </td>
                   </tr>
                   <tr>
@@ -259,9 +304,14 @@ export default function TelemetryReportModal({
                     </td>
                     <td className="text-center text-[var(--subtle)]">&lt; 3.0 (Low Fatigue)</td>
                     <td className="text-right">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400">
-                        NOMINAL
-                      </span>
+                      {(() => {
+                        const s = getStatus(flags.fatigue);
+                        return (
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${s.cls}`}>
+                            {s.label}
+                          </span>
+                        );
+                      })()}
                     </td>
                   </tr>
                 </tbody>

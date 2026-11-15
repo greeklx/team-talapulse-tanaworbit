@@ -20,7 +20,7 @@
     }
   },
   "vars": {
-    "ENVIRONMENT": "development"
+    "ENVIRONMENT": "production"
   },
   "routes": [
     {
