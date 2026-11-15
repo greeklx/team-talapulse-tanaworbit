@@ -359,6 +359,13 @@ h1,
   transform: translateY(-1px);
 }
 
+.tanaw-guide-launcher.is-minimized {
+  border-radius: 9999px !important;
+  width: 44px !important;
+  min-height: 44px !important;
+  padding: 0 !important;
+}
+
 .tanaw-guide-launcher small {
   color: var(--on-accent);
   opacity: 0.85;

@@ -6544,8 +6544,8 @@ textarea::placeholder {
 
 .touch-mode .tanaw-guide-launcher {
   bottom: 96px;
-  left: 18px;
-  right: auto;
+  right: 18px;
+  left: auto;
   padding: 8px 14px;
   border-radius: 9999px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
